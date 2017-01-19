@@ -1,11 +1,9 @@
 ---
-title: API Reference
+title: Team Edition API Docs
 
 language_tabs:
   - shell
   - ruby
-  - python
-  - javascript
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
@@ -19,171 +17,123 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the Team Edition API! You can use our API to access NCSA Team Edition API endpoints.
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+We have language bindings in Shell and Ruby! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
-This example API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+# Team Edition API
 
-# Authentication
-
-> To authorize, use this code:
+## Ping Test
 
 ```ruby
-require 'kittn'
+require 'uri'
+require 'net/http'
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
+url = URI("http://qa.ncsasports.org/api/team_edition/ping")
 
-```python
-import kittn
+http = Net::HTTP.new(url.host, url.port)
 
-api = kittn.authorize('meowmeowmeow')
+request = Net::HTTP::Get.new(url)
+
+response = http.request(request)
+puts response.read_body
 ```
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+curl --request GET \
+  --url http://qa.ncsasports.org/api/team_edition/ping
 ```
 
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
+Health Check for Team Edition application
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`GET /api/team_edition/ping`
 
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
+## Sign-In
 
 ```ruby
-require 'kittn'
+require 'uri'
+require 'net/http'
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
+url = URI("http://qa.ncsasports.org/api/team_edition/sign_in")
+
+http = Net::HTTP.new(url.host, url.port)
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = 'application/vnd.api+json'
+request.body = {
+  data: {
+    type: 'sessions',
+    attributes: {
+      email: 'jlockhart@ncsasports.org',
+      password: 'password'
+    }
+  }
+}
+response = http.request(request)
+puts response.read_body
 ```
 
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
+curl --request POST \
+  --url http://qa.ncsasports.org/api/team_edition/sign_in \
+  --header 'content-type: application/vnd.api+json' \
+  --data '{\n  "data": {\n    "type": "sessions",\n	  "attributes": {\n	    "email": "jlockhart@ncsasports.org",\n	    "password": "password"\n	 }\n  }\n}'
 ```
 
-```javascript
-const kittn = require('kittn');
+> Request Body:
 
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
+```json
+{
+  "data": {
+    "type": "sessions",
+	  "attributes": {
+	    "email": "jlockhart@ncsasports.org",
+	    "password": "password"
+	 }
+  }
+}
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "data": {
+    "id": "19",
+    "type": "sessions",
+    "attributes": {
+      "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9"
+    },
+    "relationships": {
+      "coach": {
+        "data": {
+          "id": "19",
+          "type": "coaches"
+        }
+      },
+      "organization": {
+        "data": {
+          "id": "9",
+          "type": "organizations"
+        }
+      }
+    },
+    "links": {
+      "self": "/api/team_edition/sign_in"
+    }
+  }
 }
 ```
 
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+POST for team edition coach sign in
 
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`POST http://qa.ncsasports.org/api/team_edition/sign_in`
 
-### URL Parameters
+### Headers
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
+**Content-Type** | application/vnd.api+json
