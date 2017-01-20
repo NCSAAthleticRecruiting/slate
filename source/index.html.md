@@ -10,7 +10,14 @@ toc_footers:
   - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 includes:
-  - errors
+  - ping
+  - sign_in
+  - post_org
+  - get_org
+  - patch_org
+  - get_org_athletes
+  - get_athlete
+  - get_college
 
 search: true
 ---
@@ -22,118 +29,3 @@ Welcome to the Team Edition API! You can use our API to access NCSA Team Edition
 We have language bindings in Shell and Ruby! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
 # Team Edition API
-
-## Ping Test
-
-```ruby
-require 'uri'
-require 'net/http'
-
-url = URI("http://qa.ncsasports.org/api/team_edition/ping")
-
-http = Net::HTTP.new(url.host, url.port)
-
-request = Net::HTTP::Get.new(url)
-
-response = http.request(request)
-puts response.read_body
-```
-
-```shell
-curl --request GET \
-  --url http://qa.ncsasports.org/api/team_edition/ping
-```
-
-Health Check for Team Edition application
-
-### HTTP Request
-
-`GET /api/team_edition/ping`
-
-## Sign-In
-
-```ruby
-require 'uri'
-require 'net/http'
-
-url = URI("http://qa.ncsasports.org/api/team_edition/sign_in")
-
-http = Net::HTTP.new(url.host, url.port)
-
-request = Net::HTTP::Post.new(url)
-request["content-type"] = 'application/vnd.api+json'
-request.body = {
-  data: {
-    type: 'sessions',
-    attributes: {
-      email: 'jlockhart@ncsasports.org',
-      password: 'password'
-    }
-  }
-}
-response = http.request(request)
-puts response.read_body
-```
-
-
-```shell
-curl --request POST \
-  --url http://qa.ncsasports.org/api/team_edition/sign_in \
-  --header 'content-type: application/vnd.api+json' \
-  --data '{\n  "data": {\n    "type": "sessions",\n	  "attributes": {\n	    "email": "jlockhart@ncsasports.org",\n	    "password": "password"\n	 }\n  }\n}'
-```
-
-> Request Body:
-
-```json
-{
-  "data": {
-    "type": "sessions",
-	  "attributes": {
-	    "email": "jlockhart@ncsasports.org",
-	    "password": "password"
-	 }
-  }
-}
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "data": {
-    "id": "19",
-    "type": "sessions",
-    "attributes": {
-      "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9"
-    },
-    "relationships": {
-      "coach": {
-        "data": {
-          "id": "19",
-          "type": "coaches"
-        }
-      },
-      "organization": {
-        "data": {
-          "id": "9",
-          "type": "organizations"
-        }
-      }
-    },
-    "links": {
-      "self": "/api/team_edition/sign_in"
-    }
-  }
-}
-```
-
-POST for team edition coach sign in
-
-### HTTP Request
-
-`POST http://qa.ncsasports.org/api/team_edition/sign_in`
-
-### Headers
-
-**Content-Type** | application/vnd.api+json
