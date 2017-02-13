@@ -27,6 +27,41 @@ response = http.request(request)
 puts response.read_body
 ```
 
+> Sample Successful Response:
+
+```json
+{
+  "data": {
+    "id": "1",
+    "type": "organizations",
+    "attributes": {
+      "name": "Cool Volleyball",
+      "zip-code": "56906",
+      "address": "234 Maple Lane",
+      "city": "Chicago",
+      "state": "IL",
+      "email": "org@example.com",
+      "phone": "3122234567",
+      "website": "http://www.example.com",
+      "logo-url": "/images/default_organization_image.png",
+      "current-contract-ids": [4],
+      "sports": [
+        "Women's Volleyball",
+        "Men's Volleyball"
+      ],
+      "primary-contact-name": null
+    },
+    "links": {
+      "self": "/api/team_edition/organizations/1"
+    }
+  },
+  "links": {
+    "self": "/api/team_edition/organizations/1"
+  }
+}
+
+```
+
 GET for retrieving organization resource
 
 ### HTTP Request

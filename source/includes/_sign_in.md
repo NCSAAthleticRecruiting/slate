@@ -7,7 +7,7 @@
   "data": {
     "type": "sessions",
 	  "attributes": {
-	    "email": "jlockhart@ncsasports.org",
+	    "email": "lockjhart@ncsa.tst",
 	    "password": "password"
 	 }
   }
