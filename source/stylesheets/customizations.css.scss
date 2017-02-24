@@ -1,0 +1,14 @@
+@charset "utf-8";
+@import 'normalize';
+@import 'variables';
+@import 'icon-font';
+
+h2.page-title {
+  //  @todo  remove inline styles once slate can be previewed/is deployed
+  color: white;
+  background-color: #f0ad4e;
+  font-family: 'monaco','sans-serif';
+  padding: 0.5em 0;
+  display: block;
+  text-align: center;
+}
