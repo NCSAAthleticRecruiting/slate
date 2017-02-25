@@ -1,30 +1,64 @@
-# Update Organization
-<br>
+# Update an organization
 
-## _Overview_
+**PATCH `/api/team_edition/organizations/3`**
 
-* `PATCH /api/team_edition/organizations/[:organization_id]`
+This endpoint is responsible for updating an existing organziation.
 
-* Request Headers
-  * `Content-Type`: `application/vnd.api+json`
-  * `Session-Token`: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9`
-  * Sample Request Body (for updating `organization.name`)
-    ```json
-      {
-        "data": {
-          "type": "organizations",
-          "id":"1",
-          "attributes": {
-            "name":"Spree Volleyball Club"
-          }
-        }
-      }
-    ```
+## Request
 
+**Headers**
+
+| Header            | Value                         | Required?  |
+|:------------------|:------------------------------|:-----------|
+| _Content-Type_    | application/vnd.api+json      | `true`     |
 
 <br>
-## _Sample Successful Requests_
 
+**Data Attributes**
+
+| Parameter           | `Type`      | Required?     | Description           |
+|:------------------- |:------------|:--------------|:----------------------|
+| `email`             | String      | `true`        |                       |
+| `password`          | String      | `true`        |                       |
+| `attributes`        | Hash        | `true`        |                       |
+| `attribute["name"]` | String      | `false`       | organization's name   |
+
+
+**Organization Attributes**
+
+
+```ruby
+    :name,
+    :zip_code,
+    :address,
+    :city,
+    :state,
+    :email,
+    :phone,
+    :website
+  ```
+
+
+
+
+**Sample Request Payload**
+
+<aside class="notice>Must meet the JSON Api spec requirements for <a href="http://jsonapi.org/format/#crud-updating">updating a resource</a></aside>
+
+
+```json
+{
+  "data": {
+    "type": "organizations",
+    "id": "3",
+    "attributes": {
+      "name": "Other Sports with Bill Murray"
+    }
+  }
+}
+```
+
+``
 #### 1. cURL (for updating `organization.name`)
 
 ```shell
@@ -58,6 +92,9 @@ puts response.read_body
 <br>
 <br>
 
-## _Sample Successful Response_
+## Response
 
-* `Response`: `HTTP/1.1 204 No Content`
+**Sample Success Response**
+
+
+`Status Code: 204 No Content`

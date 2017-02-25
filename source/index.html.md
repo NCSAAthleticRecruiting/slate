@@ -4,6 +4,8 @@ title: Team Edition API Docs
 language_tabs:
 
 toc_footers:
+  - <h2>Tips</h2>
+  - The often-referenced `session-token` header can be found stored in a cookie named `team_rms_session`.<br>
   - <h2>Helpful Documentation</h2><br>
   - <strong><a href='http://jsonapi.org'>JSON API Documentation</a></strong>
   - <strong><a href="http://jsonapi.org/format/#crud-creating">Creating a Resource</a></strong>
@@ -187,10 +189,10 @@ If you have trouble with any of the syntax, or if it's confusing, let us know by
 
 **Help with JSON API Requests**
 
-* <a href="http://jsonapi.org/format/#crud-creating">Creating a RESOURCE</a>
-* <a href="http://jsonapi.org/format/#crud-updating">Updating a RESOURCE</a>
-* <a href="http://jsonapi.org/format/#crud-updating-relationships">Updating RESOURCE Relationships</a>
-* <a href="http://jsonapi.org/format/#crud-deleting">Deleting a RESOURCE</a>
+* <a href="http://jsonapi.org/format/#crud-creating">Creating a Resource</a>
+* <a href="http://jsonapi.org/format/#crud-updating">Updating a Resource</a>
+* <a href="http://jsonapi.org/format/#crud-updating-relationships">Updating Resource Relationships</a>
+* <a href="http://jsonapi.org/format/#crud-deleting">Deleting a Resource</a>
 
 
 Error Code | Meaning

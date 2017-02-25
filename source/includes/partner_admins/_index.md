@@ -1,28 +1,33 @@
-# Index Page for Partner Admins
-<br>
+# GET ALL PARTNER ADMINS FOR PARTNER
 
-## _Overview_
+**GET `/api/team_edition/partners/1/partner_admins`**
 
-`GET /api/team_edition/partners/1/partner_admins`
+This endpoint is responsible for retrieving all partner admins.
 
-_Request Headers_
-  * `Content-Type`: `application/vnd.api+json`
-  * `Session-Token`: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9`
+## Requests
 
-<br>
-## _Sample Successful Requests_
+**Headers**
 
-#### 1. cURL
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
+
+
+
+**Code Samples**
+
+_cURL_
 
 ```shell
 curl --request GET \
-  --url http://qa.ncsasports.org/api/team_edition/partners/1/partner_admins \
+  "http://qa.ncsasports.org/api/team_edition/partners/1/partner_admins" \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...'
 ```
 
 
-#### 2. Ruby Net::HTTP
+_Ruby Net::Http_
 
 ```ruby
 require 'uri'
@@ -33,17 +38,22 @@ url = URI("http://qa.ncsasports.org/api/team_edition/partners/1/partner_admins")
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Get.new(url)
-request["session-token"] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
 request["content-type"] = 'application/vnd.api+json'
+request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
 
 response = http.request(request)
 puts response.read_body
 ```
 
-<br>
-<br>
 
-## _Sample Successful Response_
+## Responses
+
+**Response Types**
+
+| Status Code                    | Description/Cause                          |
+|--------------------------------|--------------------------------------------|
+| 200 OK                         | Successfully retrieved partner admins      |
+| 404 Not Found                  | partner_id doesn't exist                   |
 
 ```json
 {
@@ -69,26 +79,9 @@ puts response.read_body
       "id": "2",
       "type": "partner-admins",
       "attributes": {
-        "first-name": "Cristin",
-        "last-name": "O'Connor",
-        "email": "coconnor@ncsasports.org"
-      },
-      "relationships": {
-        "partner": {
-          "data": {
-            "id": "1",
-            "type": "partners"
-          }
-        }
-      }
-    },
-    {
-      "id": "3",
-      "type": "partner-admins",
-      "attributes": {
-        "first-name": "Justice",
-        "last-name": "Johnson",
-        "email": "justjo@example.com"
+        "first-name": "Bill",
+        "last-name": "Murray",
+        "email": "thisisnt@billmurraysemail.com"
       },
       "relationships": {
         "partner": {
@@ -102,8 +95,3 @@ puts response.read_body
   ]
 }
 ```
-
-
-
-
-

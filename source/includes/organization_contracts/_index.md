@@ -1,27 +1,32 @@
-# Index Page for Organization Contracts
-<br>
+# GET ALL CONTRACTS FOR AN ORGANIZATION
 
-## _Overview_
+**GET `/api/team_edition/organizations/[:organization_id]/organization_contracts`**
 
-* `GET /api/team_edition/organizations/[:organization_id]/organization_contracts`
-* Request Headers
-  * `Content-Type`: `application/vnd.api+json`
-  * `Session-Token`: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9`
+This endpoint retrieves the team edition contracts that an organization has.
 
-<br>
-## _Sample Successful Requests_
+## Requests
 
-#### 1. cURL
+**Headers**
+
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
+
+
+**Code Samples**
+
+_cURL_
 
 ```shell
 curl --request GET \
-  --url http://qa.ncsasports.org/api/team_edition/organizations/2/organization_contracts \
+  "http://qa.ncsasports.org/api/team_edition/organizations/2/organization_contracts" \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...'
 ```
 
 
-#### 2. Ruby Net::HTTP
+_Ruby Net::Http_
 
 ```ruby
 require 'uri'
@@ -32,17 +37,25 @@ url = URI("http://qa.ncsasports.org/api/team_edition/organizations/2/organizatio
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Get.new(url)
-request["session-token"] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
 request["content-type"] = 'application/vnd.api+json'
+request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
 
 response = http.request(request)
 puts response.read_body
 ```
 
-<br>
-<br>
 
-## _Sample Successful Response_
+
+## Responses
+
+**Response Types**
+
+| Status Code                    | Description/Cause                 |
+|--------------------------------|-----------------------------------|
+| 200 OK                         | Successfully retrieved teams      |
+
+
+**Sample Successful Response**
 
 ```json
 {
@@ -51,14 +64,14 @@ puts response.read_body
       "id": "1",
       "type": "organization-contracts",
       "attributes": {
-        "start-date": "2017-02-20",
-        "end-date": "2018-02-20",
-        "modifier": "1.0",
-        "number-of-payments": 1,
-        "number-of-teams": 1,
+        "start-date": "2017-02-27",
+        "end-date": "2018-02-27",
+        "modifier": "0.9",
+        "number-of-payments": 3,
+        "number-of-teams": 2,
         "number-of-athletes": 0,
-        "current-contract-amount": "2160.0",
-        "sport-name": "Soccer"
+        "current-contract-amount": "4968.0",
+        "sport-name": "Lacrosse"
       },
       "relationships": {
         "organization": {
@@ -69,13 +82,44 @@ puts response.read_body
         },
         "sport": {
           "data": {
-            "id": "3",
+            "id": "1",
             "type": "sports"
           }
         }
       },
       "links": {
         "self": "/api/team_edition/organization_contracts/1"
+      }
+    },
+    {
+      "id": "2",
+      "type": "organization-contracts",
+      "attributes": {
+        "start-date": "2017-02-28",
+        "end-date": "2018-02-28",
+        "modifier": "1.0",
+        "number-of-payments": 1,
+        "number-of-teams": 1,
+        "number-of-athletes": 0,
+        "current-contract-amount": "1560.0",
+        "sport-name": "Volleyball"
+      },
+      "relationships": {
+        "organization": {
+          "data": {
+            "id": "2",
+            "type": "organizations"
+          }
+        },
+        "sport": {
+          "data": {
+            "id": "2",
+            "type": "sports"
+          }
+        }
+      },
+      "links": {
+        "self": "/api/team_edition/organization_contracts/2"
       }
     }
   ],

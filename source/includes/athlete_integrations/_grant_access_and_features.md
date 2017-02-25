@@ -1,4 +1,4 @@
-# Update athlete access and features for NCSA
+# UPDATE ATHLETE NCSA MEMBERSHIP ACCESS & FEATURES
 
 **PUT `/api/team_edition/athletes/:client_id/grant_access_and_features`**
 
@@ -13,12 +13,6 @@ Handles the granting of additional access and features to NCSA applications for 
 | _Session-Token_   | eyJ0eXAiOiJKV1QiLCJhbG...  | `true`    |
 | _Content-Type_    | application/vnd.api+json   | `true`    |
 
-
-### Sample Request Parameters
-
-| Parameter   | Required? | Description         |
-|:-----------:|:---------:|:-------------------:|
-| `client_id` | `true`    | query string param  |
 
 
 ### Request Examples
@@ -61,3 +55,8 @@ puts response.read_body
   "status":"success"
 }
 ```
+
+no athlete with that client id
+{
+  "details": "No athlete found"
+}

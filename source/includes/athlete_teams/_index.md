@@ -1,18 +1,28 @@
-# Get an athlete's teams
+# GET ALL TEAMS FOR ATHLETE
 
 ** GET `/api/team_edition/athletes/:athlete_id/relationships/teams`**
 
-This endpoint shows the teams that an athlete plays on
+This endpoint gets the teams an athlete belongs to.
 
-### Sample Requests
+## Requests
 
-**cURL**
+**Headers**
+
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
+
+
+**Code Samples**
+
+_cURL_
 
 ```shell
 curl --request GET \
-  --url http://qa.ncsasports.org/api/team_edition/athletes/10/relationships/teams \
+  "http://qa.ncsasports.org/api/team_edition/athletes/10/relationships/teams" \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...'
 ```
 
 <br>
@@ -28,8 +38,8 @@ url = URI("http://qa.ncsasports.org/api/team_edition/athletes/10/relationships/t
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Get.new(url)
-request["session-token"] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
 request["content-type"] = 'application/vnd.api+json'
+request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
 
 response = http.request(request)
 puts response.read_body
@@ -37,7 +47,17 @@ puts response.read_body
 
 
 
-### Sample Response
+## Responses
+
+**Response Types**
+
+| Status Code                    | Description/Cause                       |
+|--------------------------------|-----------------------------------------|
+| 200 OK                         | Successfully retrieved athlete's teams  |
+
+
+
+**Sample Successful Response**
 
 ```json
 {
