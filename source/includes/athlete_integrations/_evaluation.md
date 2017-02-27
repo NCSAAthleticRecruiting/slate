@@ -1,37 +1,72 @@
-# Create evaluation
+# Create evaluation for an athlete
 
-**POST `/api/team_edition/athletes/15/evaluation`**
+**POST `/api/team_edition/athletes/:athlete_id/evaluation`**
 
 This endpoint is responsible for creating an athlete's team edition evaluation, including a description and rating.
 
-### Sample Request Headers
+## Requests
 
-| Header            | Value                      | Required? |
-|-------------------|----------------------------|-----------|
-| _Session-Token_   | eyJ0eXAiOiJKV1QiLCJ...     | `true`    |
-| _Content-Type_    | `application/vnd.api+json` | `true`    |
+**Headers**
 
-### Request Parameters
+| Header            | `Type`/_Value_/Description        | Required?     |
+|:-----------------:|:---------------------------------:|:-------------:|
+| _Session-Token_   | eyJ0eXAiOiJKV1QiLCJ...            | `true`        |
+| _Content-Type_    | `application/vnd.api+json`        | `true `       |
 
-| Parameter      | Required? | Description  |
-|:--------------:|:---------:|:------------:|
-|`description`   | `false`   |              |
-|`rating`        | `false`   |              |
+<br>
+
+**Data Attributes**
+
+| Attribute         | `Type`/_Value_/Description        | Required?     |
+|:-----------------:|:----------------------------------|:--------------|
+|`description`      | Free text                         | `false`       |
+|`rating`           | `Integer` (0-6)                   | `false`       |
 
 
-### Sample Requests
+**Sample Request Data**
 
-<aside class="notice">The coach editing the rating must be an admin in order for the request to suceed.</aside>
+```json
+{
+  "data": {
+    "rating": 4,
+    "description": "Dillon is, in my opinion, the platonic form for an athlete.",
+    "type": "evaluation",
+    "attributes": {
+      "description": "A description that is changing."
+    },
+    "relationships": {
+      "athlete": {
+        "data": {
+          "type": "athletates",
+          "id": "2"
+        }
+      },
+      "organization": {
+        "data": {
+          "type": "organizations",
+          "id": "1"
+        }
+      }
+    }
+  }
+}
+```
+
+### Code Examples
+
+<aside class="notice">The current user must have admin priveleges or they'll get an unauthorized error.</aside>
 
 **cURL**
 
 ```json
 curl request POST \
+  --url "http://qa.ncsasports.org/api/team_edition/athletes/:athlete_id/evaluation" \
   --header 'Content-Type: application/vnd.api+json' \
   --header 'Session-Token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9' \
-  --data '{"data":{"type":"evaluation","attributes":{"description":"A description that is changing."},"relationships":{"athlete":{"data":{"type":"athletates","id":"2"}},"organization":{"data":{"type":"organizations","id":"1"}}}}}'
-  --data '{"data":{"type":"evaluation","attributes":{"rating":4,"description": "Dillon is, in my opinion, the platonic form for an athlete."},"relationships":{"athlete":{"data":{"type":"athletes","id":"5"}},"organization":{"data":{"type":"organizations","id":"1"}}}}}'
+  --data '{"data":{"rating":4,"description": "Dillon is, in my opinion, the platonic form for an athlete.", "type":"evaluation","attributes":{"description":"A description that is changing."},"relationships":{"athlete":{"data":{"type":"athletates","id":"2"}},"organization":{"data":{"type":"organizations","id":"1"}}}}}'
 ```
+
+<br>
 
 **Ruby Net::HTTP**
 

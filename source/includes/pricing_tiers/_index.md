@@ -1,22 +1,32 @@
-# Gets all pricing tiers for a given sport
+# GET ALL PRICING TIERS FOR SPORT
 
 **GET `/api/team_edition/sports/:sport_id/pricing_tiers`**
 
 This endpoint shows all the possible pricing tiers for a given sport.
 
-### Sample Requests
+## Requests
 
-**cURL**
+**Headers**
+
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
+
+
+**Code Samples**
+
+_cURL_
 
 ```shell
 curl --request GET \
-  --url http://qa.ncsasports.org/api/team_edition/sports/1/pricing_tiers \
+  "http://qa.ncsasports.org/api/team_edition/sports/1/pricing_tiers" \
   --header 'content-type: application/vnd.api+json' \
-  --header 'Session-Token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9' \
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...'
 
 ```
 
-**Ruby Net::Http**
+_Ruby Net::Http_
 
 ```ruby
 require 'uri'
@@ -28,16 +38,22 @@ http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Get.new(url)
 request["content-type"] = 'application/vnd.api+json'
-request["session-token"] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9' \
+request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
 
 response = http.request(request)
 puts response.read_body
 ```
 
+## Responses
+
+**Response Types**
+
+| Status Code                    | Description/Cause                 |
+|--------------------------------|-----------------------------------|
+| 200 OK                         | Successfully retrieved teams      |
 
 
-
-### Sample Response
+**Sample Successful Response**
 
 ```json
 {

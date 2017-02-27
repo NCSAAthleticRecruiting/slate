@@ -1,28 +1,32 @@
-# Show Coaches Index Page
-<br>
+# GET ALL COACHES FOR ORGANIZATION
 
-## _Overview_
+**GET `/api/team_edition/organizations/:organization_id/coaches`**
 
-`GET /api/team_edition/organizations/[:organization_id]/coaches`
+This endpoint retrieves all of the coaches belonging to an organization.
 
-_Request Headers_
-  * `Content-Type`: `application/vnd.api+json`
-  * `Session-Token`: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9`
+## Requests
 
-<br>
-## _Sample Successful Requests_
+**Headers**
 
-#### 1. cURL
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
+
+
+**Code Samples**
+
+_cURL_
 
 ```shell
 curl --request GET \
-  --url http://qa.ncsasports.org/api/team_edition/organizations/1/coaches \
+  "http://qa.ncsasports.org/api/team_edition/organizations/1/coaches" \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...'
 ```
 
 
-#### 2. Ruby Net::HTTP
+_Ruby Net::Http_
 
 ```ruby
 require 'uri'
@@ -33,17 +37,24 @@ url = URI("http://qa.ncsasports.org/api/team_edition/organizations/1/coaches")
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Get.new(url)
-request["session-token"] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
 request["content-type"] = 'application/vnd.api+json'
+request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
 
 response = http.request(request)
 puts response.read_body
 ```
 
-<br>
-<br>
 
-## _Sample Successful Response_
+## Responses
+
+**Response Types**
+
+| Status Code                    | Description/Cause                 |
+|--------------------------------|-----------------------------------|
+| 200 OK                         | Successfully retrieved coaches    |
+
+
+**Sample Successful Response**
 
 ```json
 {
@@ -59,6 +70,7 @@ puts response.read_body
         "position-title": "Head Coach",
         "photo-url": "/images/default_user_image.png",
         "admin": false,
+        "primary-contact": false,
         "deleted": false
       },
       "relationships": {
@@ -91,7 +103,8 @@ puts response.read_body
         "phone": null,
         "position-title": "Head Coach",
         "photo-url": "/images/default_user_image.png",
-        "admin": false,
+        "admin": true,
+        "primary-contact": false,
         "deleted": false
       },
       "relationships": {
