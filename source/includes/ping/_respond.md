@@ -1,7 +1,10 @@
-# Respond/Ping
+# RESPOND/PING
 
+**GET `/api/team_edition/ping`**
 
-## Ping Test
+Health Check for Team Edition application
+
+**Code Examples**
 
 ```ruby
 require 'uri'
@@ -19,11 +22,11 @@ puts response.read_body
 
 ```shell
 curl --request GET \
-  --url http://qa.ncsasports.org/api/team_edition/ping
+  "http://qa.ncsasports.org/api/team_edition/ping"
 ```
 
-Health Check for Team Edition application
 
-### HTTP Request
 
-`GET /api/team_edition/ping`
+## Errors & Statuses
+
+* For errors, see relevant spec files to flesh out this section.

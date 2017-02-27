@@ -1,6 +1,6 @@
 # GET ALL TEAMS FOR ATHLETE
 
-** GET `/api/team_edition/athletes/:athlete_id/relationships/teams`**
+**GET `/api/team_edition/athletes/:athlete_id/relationships/teams`**
 
 This endpoint gets the teams an athlete belongs to.
 
@@ -48,14 +48,6 @@ puts response.read_body
 
 
 ## Responses
-
-**Response Types**
-
-| Status Code                    | Description/Cause                       |
-|--------------------------------|-----------------------------------------|
-| 200 OK                         | Successfully retrieved athlete's teams  |
-
-
 
 **Sample Successful Response**
 

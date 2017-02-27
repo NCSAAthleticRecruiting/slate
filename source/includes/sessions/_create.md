@@ -1,31 +1,28 @@
-# CREATE session
+# CREATE A SESSION
 
 **POST `/api/team_edition/sign_in`**
 
 This endpoint is responsible for the control flow once a user submits the login form. A new `Session` for the authenticated user is initialized when the request succeeded.
 
-## Request
+
+## Requests
+
 
 **Headers**
 
-| Header            | `Type`/_Value_/Description        | Required?     |
-|:------------------|:---------------------------------:|:-------------:|
-| _Content-Type_    | `application/vnd.api+json`        | `true `       |
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
 
-<br>
 
-**Data Attributes**
 
-| Attribute         | `Type`/_Value_/Description        | Required?     |
-|:------------------|:----------------------------------|:--------------|
-|`email`            | `String`                          | `true`        |
-|`password`         | `String`                          | `true`        |
-|`type`             | `String`/'sessions'               | `true`        |
+**Required Attributes**
+
+* `attributes['email']`
+* `attributes['password']`
 
 
 **Sample Request Payload**
-
-<aside class="notice>Must meet the JSON Api spec requirements for <a href="http://jsonapi.org/format/#crud-updating">updating a resource</a></aside>
 
 ```json
 {
@@ -40,11 +37,12 @@ This endpoint is responsible for the control flow once a user submits the login 
 ```
 
 **Code Examples**
+
 _cURL_
 
 ```shell
 curl --request POST \
-  --url "http://qa.ncsasports.org/api/team_edition/sign_in" \
+  "http://qa.ncsasports.org/api/team_edition/sign_in" \
   --header 'Content-Type: application/vnd.api+json' \
   --data '{"data":{"type":"sessions","attributes":{"email":"mia@example.com","password":"password"}}}'
 ```
@@ -71,12 +69,12 @@ puts response.read_body
 
 <br>
 
-## Response
+## Responses
 
 <aside class="notice"><ul><li>Note that the self link is changed to the sign-in in page url in the AthleteIntegrations controller, and the `session-type` is set based on whether the user is a `Coach` or `PartnerAdmin`.</li></ul></aside>
 
 ```json
-
+/* for a coach */
 {
   "data": {
     "id": "2",
@@ -90,6 +88,10 @@ puts response.read_body
     }
   }
 }
+```
+
+```json
+/* for a partner admin */
 {
   "data": {
     "id": "1",
@@ -105,3 +107,8 @@ puts response.read_body
 }
 
 ```
+
+
+## Errors & Statuses
+
+* For errors, see relevant spec files to flesh out this section.

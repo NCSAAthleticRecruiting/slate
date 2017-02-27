@@ -1,4 +1,4 @@
-# GET TEAMS FOR AN ORGANIZATION
+# GET ALL TEAMS FOR AN ORGANIZATION
 
 **GET `/api/team_edition/organizations/:organization_id/teams`**
 
@@ -155,3 +155,8 @@ puts response.read_body
 }
 
 ```
+
+
+## Errors & Statuses
+
+* For errors, see relevant spec files to flesh out this section.

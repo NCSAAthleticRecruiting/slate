@@ -1,12 +1,21 @@
-# Get an athlete's profile data
+# GET AN ATHLETE'S PROFILE DATA
 
 **GET `/api/team_edition/athletes/:athlete_id/profile`**
 
-This endpoint gets the data for an athlete's profile
+This endpoint gets an athlete's profile data.
 
-### Sample Requests
+## Requests
 
-**cURL**
+**Headers**
+
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
+
+**Code Examples**
+
+_cURL_
 
 ```shell
 curl --request GET \
@@ -15,7 +24,7 @@ curl --request GET \
   --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
 ```
 
-**Ruby Net::Http**
+_Ruby Net::Http_
 
 ```ruby
 require 'uri'
@@ -33,7 +42,11 @@ response = http.request(request)
 puts response.read_body
 ```
 
-### Sample Response
+
+
+## Responses
+
+**Sample Successful Response**
 
 ```json
 {
@@ -76,3 +89,8 @@ puts response.read_body
   }
 }
 ```
+
+
+## Errors & Statuses
+
+* For errors, see relevant spec files to flesh out this section.

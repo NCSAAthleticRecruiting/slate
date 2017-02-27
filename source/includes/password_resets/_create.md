@@ -14,7 +14,6 @@ This endpoint handles resetting a user's password if the user has forgotten it a
 
 **Required Attributes**
 
-* `type`
 * `attributes['email']`
 
 **Sample Request Payload**

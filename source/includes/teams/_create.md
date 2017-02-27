@@ -1,26 +1,27 @@
-# Create a team
+# CREATE A TEAM
 
 **POST `/api/team_edition/organizations/:organization_id/teams`**
 
 This endpoint creates a team for an organization.
 
-### Sample Request Headers
+## Requests
 
-| Header            | Value                      | Required? |
-|-------------------|----------------------------|-----------|
-| _Session-Token_   | eyJ0eXAiOiJKV1QiLCJhbG...  | `true`    |
-| _Content-Type_    | application/vnd.api+json   | `true`    |
+**Headers**
 
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
 
-### Sample Requests
+**Code Examples**
 
 **cURL**
 
 ```shell
 curl --request POST \
-  --url http://qa.ncsasports.org/api/team_edition/organizations/1/teams \
+  "http://qa.ncsasports.org/api/team_edition/organizations/1/teams" \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9' \
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
   --data '{"data":{"type":"teams","attributes":{"name":"cristins fun team"},"relationships":{"organization":{"data":{"type":"organizations","id":"1"}},"organization_sport":{"data":{"type":"organization_sports","id":"1"}}}}}'
 ```
 
@@ -35,7 +36,7 @@ url = URI("http://qa.ncsasports.org/api/team_edition/organizations/1/teams")
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Post.new(url)
-request["session-token"] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
 request["content-type"] = 'application/vnd.api+json'
 request.body = "{\"data\":{\"type\":\"teams\",\"attributes\":{\"name\":\"cristins fun team\"},\"relationships\":{\"organization\":{\"data\":{\"type\":\"organizations\",\"id\":\"1\"}},\"organization_sport\":{\"data\":{\"type\":\"organization_sports\",\"id\":\"1\"}}}}}"
 
@@ -72,3 +73,8 @@ puts response.read_body
   }
 }
 ```
+
+
+## Errors & Statuses
+
+* For errors, see relevant spec files to flesh out this section.

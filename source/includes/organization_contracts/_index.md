@@ -128,3 +128,8 @@ puts response.read_body
   }
 }
 ```
+
+
+## Errrors/Statuses
+
+See relevant spec files.

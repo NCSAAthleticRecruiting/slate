@@ -5,9 +5,17 @@
 
 * `POST /api/team_edition/organizations/[:organization_id]/organization_contracts`
 
-**Request Headers**
-* `Content-Type`: `application/vnd.api+json`
-* `Session-Token`: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9`
+
+
+## Requests
+
+**Headers**
+
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
+
 
 **Sample Request Body**
 
@@ -116,3 +124,8 @@ puts response.read_body
   }
 }
 ```
+
+
+## Errrors/Statuses
+
+See relevant spec files.

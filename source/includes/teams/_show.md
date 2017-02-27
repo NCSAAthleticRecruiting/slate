@@ -1,19 +1,32 @@
-# Show a single team
+# GET A SPECIFIC TEAM
 
 **GET `/api/team_edition/teams/:team_id`**
 
-This endpoint shows a single team.
+
+## Requests
+
+**Headers**
+
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
+
+
+**Code Samples**
+
+_cURL_
 
 ```shell
 curl --request GET \
-  --url http://qa.ncsasports.org/api/team_edition/teams/2 \
+  "http://qa.ncsasports.org/api/team_edition/teams/2" \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...'
 ```
 
 <br>
 
-**Ruby Net::Http**
+_Ruby Net::Http_
 
 ```ruby
 require 'uri'
@@ -63,3 +76,8 @@ puts response.read_body
   }
 }
 ```
+
+
+## Errors & Statuses
+
+* For errors, see relevant spec files to flesh out this section.

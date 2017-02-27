@@ -1,30 +1,23 @@
-# Show Preferences
+# SHOW PREFERENCES FOR ATHLETE
 
-**GET /api/team_edition/athletes/:athlete_id/preferences`**
+**GET `/api/team_edition/athletes/:athlete_id/preferences`**
 
 This endpoint retrieves the athlete's preferences.
 
 
-### Sample Request Headers
+## Requests
 
 <aside class="notice">The session token is stored in a cookie named `team_rms_session`</aside>
 
-| Header            | Value                      | Required? |
-|-------------------|----------------------------|-----------|
-| _Session-Token_   | eyJ0eXAiOiJKV1QiLCJhbG...  | `true`    |
-| _Content-Type_    | application/vnd.api+json   | `true`    |
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
 
 
-### Sample Request Parameters
+**Code Examples**
 
-| Parameter    | Required? | Description         |
-|:------------:|:---------:|:-------------------:|
-|`athlete_id`  | 120       | query string param  |
-
-
-### Request Examples
-
-**cURL**
+_cURL_
 
 ```shell
 curl --request GET \
@@ -35,7 +28,7 @@ curl --request GET \
 
 <br>
 
-**Ruby Net::HTTP**
+_Ruby Net::HTTP_
 
 ```ruby
 require 'uri'
@@ -55,7 +48,9 @@ puts response.read_body
 
 <br>
 
-## _Sample Successful Response_
+## Responses
+
+**Sample Successful Response**
 
 ```json
 {
@@ -88,27 +83,3 @@ puts response.read_body
 }
 ```
 
-
-### Miscellaneous
-
-**Help with JSON API Requests**
-
-* <a href="http://jsonapi.org/format/#crud-creating">Creating a RESOURCE</a>
-* <a href="http://jsonapi.org/format/#crud-updating">Updating a RESOURCE</a>
-* <a href="http://jsonapi.org/format/#crud-updating-relationships">Updating RESOURCE Relationships</a>
-* <a href="http://jsonapi.org/format/#crud-deleting">Deleting a RESOURCE</a>
-
-
-Error Code | Meaning
----------- | -------
-400 | Bad Request -- Your request sucks
-401 | Unauthorized -- Your API key is wrong
-403 | Forbidden -- The resource requested is hidden for administrators only
-404 | Not Found -- The specified resource could not be found
-405 | Method Not Allowed -- You tried to access a resource with an invalid method
-406 | Not Acceptable -- You requested a format that isn't json
-410 | Gone -- The resource requested has been removed from our servers
-418 | I'm a teapot
-429 | Too Many Requests -- You're requesting too many resources! Slow down!
-500 | Internal Server Error -- We had a problem with our server. Try again later.
-503 | Service Unavailable -- We're temporarially offline for maintanance. Please try again later.

@@ -75,21 +75,12 @@ puts response.read_body
 
 
 
-
 ## Responses
-
-**Response Types**
-
-| Status Code                    | Description/Cause                 |
-|--------------------------------|-----------------------------------|
-| 201 Created                    | Athlete successfully created      |
-| | |
-
-
 
 **Sample Successful Response**
 
 ```json
+/* 201 Created */
 {
   "data": {
     "id": "200",
@@ -391,3 +382,7 @@ puts response.read_body
 ```
 
 
+
+## Errors & Statuses
+
+* For errors, see relevant spec files to flesh out this section.

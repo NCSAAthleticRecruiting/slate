@@ -1,34 +1,35 @@
-# Show All Pricing Tier Sports
+# SHOW ALL PRICING TIER SPORTS
 
 **GET `/api/team_edition/pricing_tier_sports`**
 
-This endpoint shows all of the pricing tier sports.
-
-### Sample Request Headers
-
-<aside class="notice">The session token is stored in a cookie named `team_rms_session`</aside>
-
-| Header            | Value                      | Required? |
-|-------------------|----------------------------|-----------|
-| _Session-Token_   | eyJ0eXAiOiJKV1QiLCJhbG...  | `true`    |
-| _Content-Type_    | application/vnd.api+json   | `true`    |
+This endpoint shows all of the sports with pricing tiers.
 
 
-### Sample Request
+## Requests
 
-**cURL**
+**Headers**
+
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
+
+
+
+**Code Examples**
+
+_cURL_
 
 ```shell
 curl --request GET \
-  --url http:/qa.ncsasports.org/api/team_edition/pricing_tier_sports \
+  "http:/qa.ncsasports.org/api/team_edition/pricing_tier_sports" \
   --header 'content-type: application/vnd.api+json' \
   --header 'Session-Token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9' \
-
 ```
 
 <br>
 
-**Ruby Net::HTTP**
+_Ruby Net::HTTP_
 
 ```ruby
 require 'uri'
@@ -47,7 +48,9 @@ puts response.read_body
 ```
 
 
-### Sample Response
+## Responses
+
+**Sample Response Body**
 
 ```json
 {
@@ -116,3 +119,9 @@ puts response.read_body
 
 
 ```
+
+
+
+## Errors & Statuses
+
+* For errors, see relevant spec files to flesh out this section.

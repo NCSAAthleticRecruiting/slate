@@ -1,20 +1,20 @@
-# Update an organization
+# UPDATE AN ORGANIZATION
 
 **PATCH `/api/team_edition/organizations/3`**
 
 This endpoint is responsible for updating an existing organziation.
 
-## Request
+## Requests
 
 **Headers**
 
-| Header            | Value                         | Required?  |
-|:------------------|:------------------------------|:-----------|
-| _Content-Type_    | application/vnd.api+json      | `true`     |
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
 
-<br>
 
-**Data Attributes**
+<!-- **Data Attributes**
 
 | Parameter           | `Type`      | Required?     | Description           |
 |:------------------- |:------------|:--------------|:----------------------|
@@ -23,8 +23,8 @@ This endpoint is responsible for updating an existing organziation.
 | `attributes`        | Hash        | `true`        |                       |
 | `attribute["name"]` | String      | `false`       | organization's name   |
 
-
-**Organization Attributes**
+ -->
+<!-- **Organization Attributes**
 
 
 ```ruby
@@ -37,10 +37,7 @@ This endpoint is responsible for updating an existing organziation.
     :phone,
     :website
   ```
-
-
-
-
+ -->
 **Sample Request Payload**
 
 <aside class="notice>Must meet the JSON Api spec requirements for <a href="http://jsonapi.org/format/#crud-updating">updating a resource</a></aside>
@@ -58,8 +55,10 @@ This endpoint is responsible for updating an existing organziation.
 }
 ```
 
-``
-#### 1. cURL (for updating `organization.name`)
+
+**Code Examples (for updating "name")**
+
+_cURL_
 
 ```shell
 curl --request PATCH \
@@ -70,7 +69,7 @@ curl --request PATCH \
 ```
 
 
-#### 2. Ruby Net::HTTP (for updating `organization.name`)
+_Ruby Net::HTTP_
 
 ```ruby
 require 'uri'
@@ -89,8 +88,6 @@ response = http.request(request)
 puts response.read_body
 ```
 
-<br>
-<br>
 
 ## Response
 
@@ -98,3 +95,8 @@ puts response.read_body
 
 
 `Status Code: 204 No Content`
+
+
+## Errrors/Statuses
+
+See relevant spec files.

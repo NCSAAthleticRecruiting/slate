@@ -1,14 +1,20 @@
-# Create Coach
-<br>
+# CREATE A COACH
 
-## _Overview_
+**POST `/api/team_edition/organizations/[:organization_id]/coaches`**
 
-`POST /api/team_edition/organizations/[:organization_id]/coaches`
+This endpoint creates a coach for an organization.
 
-_Request Headers_
-  * `Content-Type`: `application/vnd.api+json`
-  * `Session-Token`: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9`
-_Sample Request Body_
+## Requests
+
+**Headers**
+
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
+
+
+**Sample Request Body**
 
 ```json
 {
@@ -42,21 +48,20 @@ _Sample Request Body_
 }
 ```
 
-<br>
-## _Sample Successful Requests_
+**Code Examples**
 
-#### 1. cURL
+_cURL_
 
 ```shell
 curl --request GET \
-  --url http://qa.ncsasports.org/api/team_edition/organizations/1/coaches \
+  "http://qa.ncsasports.org/api/team_edition/organizations/1/coaches" \
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
   --data-binary '{"data":{"type":"coaches","attributes":{"first_name":"Madeline","last_name":"Bryan", "email":"maddiebryan@example.com", "phone":"", "position_title": "Assistant to the Head Coach", "admin":"false"}, "relationships": {"organization": {"data":{"type":"organizations", "id":"1"}}, "team": {"data": [{"type":"teams", "id":"1"}]}}}}'
 ```
 
 
-#### 2. Ruby Net::HTTP
+_Ruby Net::HTTP_
 
 ```ruby
 require 'uri'
@@ -67,18 +72,18 @@ url = URI("http://qa.ncsasports.org/api/team_edition/organizations/1/coaches")
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Get.new(url)
-request["session-token"] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
 request["content-type"] = 'application/vnd.api+json'
+request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
 request.body = "{\"data\":{\"type\":\"coaches\",\"attributes\":{\"first_name\":\"Madeline\",\"last_name\":\"Bryan\",\"email\":\"maddiebryan@example.com\",\"phone\":\"\",\"position_title\":\"Assistant to the Head Coach\",\"admin\":\"false\"},\"relationships\":{\"organization\":{\"data\":{\"type\":\"organizations\",\"id\":\"1\"}},\"team\":{\"data\":[{\"type\":\"teams\",\"id\":\"1\"}]}}}}"
 
 response = http.request(request)
 puts response.read_body
 ```
 
-<br>
-<br>
 
-## _Sample Successful Response_
+## Responses
+
+**Sample Successful Response**
 
 ```json
 /* 201 Created */
@@ -118,3 +123,7 @@ puts response.read_body
   }
 }
 ```
+
+## Errors & Statuses
+
+For errors, see relevant spec files.

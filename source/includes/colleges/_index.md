@@ -327,3 +327,7 @@ url: `http://qa.ncsasports.org/api/team_edition/organizations/1/colleges?filter[
 
 
 
+
+## Errors & Statuses
+
+* For errors, see relevant spec files to flesh out this section.

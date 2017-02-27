@@ -83,3 +83,7 @@ puts response.read_body
 }
 ```
 
+
+## Errors & Statuses
+
+* For errors, see relevant spec files.

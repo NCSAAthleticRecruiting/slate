@@ -18,10 +18,10 @@ This endpoint retrieves all of the organizations for a specific partner.
 _cURL_
 
 ```shell
-curl -X GET \
+curl --request GET \
   "http://qa.ncsasports.org/api/team_edition/partners/1/organizations" \
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...'
 ```
 
 _Ruby Net::HTTP_
@@ -35,8 +35,8 @@ url = URI("http://qa.ncsasports.org/api/team_edition/partners/1/organizations")
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Get.new(url)
-request["content-type"] = 'application/vnd.api+json'
 request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
+request["content-type"] = 'application/vnd.api+json'
 
 response = http.request(request)
 puts response.read_body
@@ -137,3 +137,8 @@ puts response.read_body
   }
 }
 ```
+
+
+## Errrors/Statuses
+
+See relevant spec files.

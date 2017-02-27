@@ -1,13 +1,21 @@
-# Create PartnerAdmin
-<br>
+# CREATE A PARTNER ADMIN
 
-## _Overview_
+**POST `/api/team_edition/partners/[:partner_id]/partner_admins`**
 
-* `POST /api/team_edition/partners/[:partner_id]/partner_admins`
+## Requests
 
-**Request Headers**
-* `Content-Type`: `application/vnd.api+json`
-* `Session-Token`: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9`
+**Headers**
+
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
+
+**Required Attributes**
+
+* `attributes['first_name']`
+* `attributes['last_name']`
+* `attributes['email']`
 
 **Sample Request Body**
 
@@ -34,21 +42,20 @@
 ```
 
 
-<br>
-## _Sample Successful Requests_
+**Code Examples**
 
-#### 1. cURL
+_cURL_
 
 ```shell
 curl --request POST \
-  --url http://qa.ncsasports.org/api/team_edition/partners/1/partner_admins \
+  "http://qa.ncsasports.org/api/team_edition/partners/1/partner_admins" \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9' \
   --data-binary '{"data":{"type":"partner_admins","attributes":{"first_name":"Justice","last_name":"Johnson","email":"justjo@example.com"},"relationships":{"partner":{"data":{"type":"partners"}}}}}'
 ```
 
 
-#### 2. Ruby Net::HTTP
+_Ruby Net::Http_
 
 ```ruby
 require 'uri'
@@ -67,10 +74,9 @@ response = http.request(request)
 puts response.read_body
 ```
 
-<br>
-<br>
+## Responses
 
-## _Sample Successful Response_
+**Sample Successful Response**
 
 ```json
 {
@@ -94,3 +100,8 @@ puts response.read_body
 }
 ```
 
+
+
+## Errrors/Statuses
+
+See relevant spec files.

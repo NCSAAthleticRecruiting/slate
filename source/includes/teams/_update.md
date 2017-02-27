@@ -1,20 +1,23 @@
-# Update a team
+# UPDATE A TEAM
 
 **PATCH `/api/team_edition/teams/:team_id`**
 
 This endpoint updates a single team.
 
-### Sample Request Headers
 
-| Header            | Value                      | Required? |
-|-------------------|----------------------------|-----------|
-| _Session-Token_   | eyJ0eXAiOiJKV1QiLCJhbG...  | `true`    |
-| _Content-Type_    | application/vnd.api+json   | `true`    |
+## Requests
+
+**Headers**
+
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
 
 
-### Sample Requests
+**Code Samples**
 
-**cURL**
+_cURL_
 
 ```shell
 curl --request PATCH \
@@ -24,7 +27,7 @@ curl --request PATCH \
   --data-binary '{"data":{"id":"5","type":"teams","attributes":{"name":"the best team"}}}'
 ```
 
-**Ruby Net::Http**
+__Ruby Net::Http__
 
 ```ruby
 require 'uri'
@@ -44,6 +47,15 @@ puts response.read_body
 ```
 
 
-### Sample Response
+## Responses
 
-`204 No Content`
+
+**Sample Successful Response**
+
+`Status: 204 No Content`
+
+
+
+## Errors & Statuses
+
+* For errors, see relevant spec files to flesh out this section.

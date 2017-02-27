@@ -1,27 +1,32 @@
 # GET _PartnerOrganization_
-<br>
 
-## _Overview_
+**GET `/api/team_edition/partners/[:partner_id]/organizations`**
 
-* `GET /api/team_edition/partners/[:partner_id]/organizations`
-* Request Headers
-  * `Content-Type`: `application/vnd.api+json`
-  * `Session-Token`: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9`
+This endpoint shows all the possible pricing tiers for a given sport.
 
-<br>
-## _Sample Successful Requests_
+## Requests
 
-#### 1. cURL
+**Headers**
+
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
+
+
+**Code Samples**
+
+_cURL_
 
 ```shell
 curl --request GET \
   --url http://qa.ncsasports.org/api/team_edition/partners/1/organizations \
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...'
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
 ```
 
 
-#### 2. Ruby Net::HTTP
+_Ruby Net::HTTP_
 
 ```ruby
 require 'uri'
@@ -32,17 +37,19 @@ url = URI("http://qa.ncsasports.org/api/team_edition/partners/1/organizations")
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Get.new(url)
-request["session-token"] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
 request["content-type"] = 'application/vnd.api+json'
+request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
 
 response = http.request(request)
 puts response.read_body
 ```
 
-<br>
-<br>
 
-## _Sample Successful Response_
+
+
+## Responses
+
+**Sample Successful Response**
 
 ```json
 {

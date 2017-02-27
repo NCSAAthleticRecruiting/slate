@@ -14,6 +14,7 @@ This endpoint shows all the possible pricing tiers for a given sport.
 | `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
 
 
+
 **Code Samples**
 
 _cURL_
@@ -23,7 +24,6 @@ curl --request GET \
   "http://qa.ncsasports.org/api/team_edition/sports/1/pricing_tiers" \
   --header 'content-type: application/vnd.api+json' \
   --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...'
-
 ```
 
 _Ruby Net::Http_
@@ -118,3 +118,8 @@ puts response.read_body
   }
 }
 ```
+
+
+## Errors & Statuses
+
+* For errors, see relevant spec files to flesh out this section.

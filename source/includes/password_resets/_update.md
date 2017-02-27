@@ -11,10 +11,10 @@ This endpoint handles updating a user's password once they've clicked the reset 
 | Header          | Required? | Description                |
 |-----------------|-----------|----------------------------|
 | `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
 
 **Required Attributes**
 
-* `type`
 * `attributes['password']`
 * `attributes['password_reset_token']`
 

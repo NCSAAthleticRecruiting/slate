@@ -1,27 +1,30 @@
-# Show Organization
-<br>
+# GET AN ORGANIZATION
 
-## _Overview_
+**GET `/api/team_edition/organizations/[:organization_id]`**
 
-* `GET /api/team_edition/organizations/[:organization_id]`
-* Request Headers
-  * `Content-Type`: `application/vnd.api+json`
-  * `Session-Token`: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9`
+## Requests
 
-<br>
-## _Sample Successful Requests_
+**Headers**
 
-#### 1. cURL
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
+
+
+**Code Examples**
+
+_cURL_
 
 ```shell
 curl --request GET \
-  --url http://qa.ncsasports.org/api/team_edition/organizations/1 \
+  "http://qa.ncsasports.org/api/team_edition/organizations/1" \
   --header 'content-type: application/vnd.api+json' \
   --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
 ```
 
 
-#### 2. Ruby Net::HTTP
+_Ruby Net::Http_
 
 ```ruby
 require 'uri'
@@ -39,10 +42,11 @@ response = http.request(request)
 puts response.read_body
 ```
 
-<br>
-<br>
 
-## _Sample Successful Response_
+
+## Responses
+
+**Sample Successful Response**
 
 ```json
 {
@@ -75,3 +79,7 @@ puts response.read_body
   }
 }
 ```
+
+## Errrors/Statuses
+
+See relevant spec files.
