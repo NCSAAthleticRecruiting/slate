@@ -1,53 +1,33 @@
-# Create Athlete Recommendation
+# CREATE RECOMMENDATION FOR ATHLETE
 
-`POST /api/team_edition/athletes/:athlete_id/recommendation`
+**POST `/api/team_edition/athletes/:athlete_id/recommendation`**
 
 This endpoint creates a college recommendation from a coach.
 
-| Header            | Value                      | Required? |
-|-------------------|----------------------------|-----------|
-| _Session-Token_   | eyJ0eXAiOiJKV1QiLCJhbG...  | `true`    |
-| _Content-Type_    | application/vnd.api+json   | `true`    |
+## Requests
 
-| Parameter    | Required? | Description         |
-|:------------:|:---------:|:-------------------:|
-| `athlete_id` | `true`    | query string param  |
+**Headers**
 
-
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
 
 
-### Sample Request Headers
+**Code Examples**
 
-<aside class="notice">The session token is stored in a cookie named `team_rms_session`</aside>
-
-| Header            | Value                      | Required? |
-|-------------------|----------------------------|-----------|
-| _Session-Token_   | eyJ0eXAiOiJKV1QiLCJhbG...  | `true`    |
-| _Content-Type_    | application/vnd.api+json   | `true`    |
-
-
-### Sample Request Parameters
-
-| Parameter   | Required? | Description         |
-|:-----------:|:---------:|:-------------------:|
-| `client_id` | `true`    | query string param  |
-
-
-### Request Examples
-
-**cURL**
+_cURL_
 
 ```shell
 curl --request POST \
   --url http://qa.ncsasports.org/api/team_edition/athletes/110/recommendation \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
-  --data-binary '{"data":{"type":"recommendations","attributes":{"college_id":"15077","action":"create"},"relationships":{"athlete":{"data":{"type":"athletes","id":"110"}},"organization":{"data":{"type":"organizations","id":"15"}}}}}'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
+  --data-binary '{"data":{"type":"recommendations","attributes":{"college_id":"15077","action":"create"},"relationships":{"athlete":{"data":{"type":"athletes","id":"110"}},"organization":{"data":{"type":"organizations","id":"15"}}}}}' \
 ```
 
-<br>
 
-**Ruby Net::HTTP**
+_Ruby Net::HTTP_
 
 ```ruby
 require 'uri'
@@ -58,7 +38,7 @@ url = URI("http://qa.ncsasports.org/api/team_edition/athletes/110/recommendation
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Post.new(url)
-request["session-token"] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
 request["content-type"] = 'application/vnd.api+json'
 request.body = "{\"data\":{\"type\":\"recommendations\",\"attributes\":{\"college_id\":\"15077\",\"action\":\"create\"},\"relationships\":{\"athlete\":{\"data\":{\"type\":\"athletes\",\"id\":\"110\"}},\"organization\":{\"data\":{\"type\":\"organizations\",\"id\":\"15\"}}}}}"
 
@@ -67,10 +47,17 @@ puts response.read_body
 ```
 
 
-### Sample Response
+## Responses
+
+**Sample Successful Response**
 
 ```json
 {
   "details":"Recommendation created"
 }
 ```
+
+
+## Errors & Statuses
+
+See the relevant spec files to flesh this section out.

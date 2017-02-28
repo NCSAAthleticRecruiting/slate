@@ -1,8 +1,8 @@
-# RESPOND/PING
+# DESTROY A SESSION
 
-**GET `/api/team_edition/ping`**
+**GET `/api/team_edition/sign_out`**
 
-Health Check for Team Edition application.
+This endpoint terminates a session.
 
 ## Requests
 
@@ -19,38 +19,38 @@ _cURL_
 
 ```shell
 curl --request GET \
-  --url http://qa.ncsasports.org/api/team_edition/ping /
-  --header 'content-type: application/vnd.api+json' /
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' /
+  --url http://qa.ncsasports.org/api/team_edition/sign_out \
+  --header 'content-type: application/vnd.api+json' \
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
 ```
-
 
 _Ruby Net::Http_
 
 ```ruby
-require 'URI'
+require 'uri'
 require 'net/http'
 
-url = URI("http://qa.ncsasports.org/api/team_edition/ping")
+url = URI("http://qa.ncsasports.org/api/team_edition/sign_out")
 
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Get.new(url)
+request['content-type'] = 'application/vnd.api+json'
+request['session-token'] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
 
 response = http.request(request)
 puts response.read_body
 ```
 
+
 ## Responses
 
 **Sample Successful Response**
 
-```json
-/* 200 OK */
-pong
-```
+`Status: 204 No Content`
+
 
 
 ## Errors & Statuses
 
-For errors, see relevant spec files to flesh out this section.
+* For errors, see relevant spec files to flesh out this section.

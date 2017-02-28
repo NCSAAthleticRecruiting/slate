@@ -1,6 +1,6 @@
 # GET ALL PARTNER ADMINS FOR PARTNER
 
-**GET `/api/team_edition/partners/1/partner_admins`**
+**GET `/api/team_edition/partners/:partner_id/partner_admins`**
 
 This endpoint is responsible for retrieving all partner admins.
 
@@ -14,23 +14,22 @@ This endpoint is responsible for retrieving all partner admins.
 | `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
 
 
-
 **Code Samples**
 
 _cURL_
 
 ```shell
 curl --request GET \
-  "http://qa.ncsasports.org/api/team_edition/partners/1/partner_admins" \
+  --url http://qa.ncsasports.org/api/team_edition/partners/1/partner_admins \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
 ```
 
 
 _Ruby Net::Http_
 
 ```ruby
-require 'uri'
+require 'URI'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/partners/1/partner_admins")
@@ -48,14 +47,10 @@ puts response.read_body
 
 ## Responses
 
-**Response Types**
-
-| Status Code                    | Description/Cause                          |
-|--------------------------------|--------------------------------------------|
-| 200 OK                         | Successfully retrieved partner admins      |
-| 404 Not Found                  | partner_id doesn't exist                   |
+**Sample Succcessful Response**
 
 ```json
+/* 200 OK */
 {
   "data": [
     {
@@ -95,3 +90,14 @@ puts response.read_body
   ]
 }
 ```
+
+
+## Errrors/Statuses
+
+See relevant spec files.
+
+
+| Status Code                    | Description/Cause                          |
+|--------------------------------|--------------------------------------------|
+| 200 OK                         | Successfully retrieved partner admins      |
+| 404 Not Found                  | partner_id doesn't exist                   |

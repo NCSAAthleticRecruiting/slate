@@ -1,58 +1,103 @@
-# Create a team
+# CREATE A TEAM
 
 **POST `/api/team_edition/organizations/:organization_id/teams`**
 
 This endpoint creates a team for an organization.
 
-### Sample Request Headers
+## Requests
 
-| Header            | Value                      | Required? |
-|-------------------|----------------------------|-----------|
-| _Session-Token_   | eyJ0eXAiOiJKV1QiLCJhbG...  | `true`    |
-| _Content-Type_    | application/vnd.api+json   | `true`    |
+**Headers**
+
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
+
+**Required Data**
+
+* attributes
+  - `name`
+* `type` ('teams')
+* relationships
+  - `organization`
+  - `organization_sport`
 
 
-### Sample Requests
+**Sample Request Payload**
 
-**cURL**
+```json
+{
+  "data": {
+    "type": "teams",
+    "attributes": {
+      "name": "Murray's Women's Volleyball Squad"
+    },
+    "relationships": {
+      "organization": {
+        "data": {
+          "type": "organizations",
+          "id": "1"
+        }
+      },
+      "organization_sport": {
+        "data": {
+          "type": "organization_sports",
+          "id": "1"
+        }
+      }
+    }
+  }
+}
+```
+
+
+**Code Examples**
+
+_cURL_
 
 ```shell
 curl --request POST \
   --url http://qa.ncsasports.org/api/team_edition/organizations/1/teams \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9' \
-  --data '{"data":{"type":"teams","attributes":{"name":"cristins fun team"},"relationships":{"organization":{"data":{"type":"organizations","id":"1"}},"organization_sport":{"data":{"type":"organization_sports","id":"1"}}}}}'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
+  --data-binary $'{"data":{"type":"teams","attributes":{"name":"Murray\'s Women\'s Volleyball Squad"},"relationships":{"organization":{"data":{"type":"organizations","id":"1"}},"organization_sport":{"data":{"type":"organization_sports","id":"1"}}}}}' \
 ```
 
-**Ruby Net::Http**
+
+_Ruby Net::HTTP_
 
 ```ruby
-require 'uri'
+require 'URI'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/organizations/1/teams")
+options = {"data":{"type":"teams","attributes":{"name":"Murray\'s Women\'s Volleyball Squad"},"relationships":{"organization":{"data":{"type":"organizations","id":"1"}},"organization_sport":{"data":{"type":"organization_sports","id":"1"}}}}}
 
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Post.new(url)
-request["session-token"] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
 request["content-type"] = 'application/vnd.api+json'
-request.body = "{\"data\":{\"type\":\"teams\",\"attributes\":{\"name\":\"cristins fun team\"},\"relationships\":{\"organization\":{\"data\":{\"type\":\"organizations\",\"id\":\"1\"}},\"organization_sport\":{\"data\":{\"type\":\"organization_sports\",\"id\":\"1\"}}}}}"
+request.body = options.to_json
 
 response = http.request(request)
 puts response.read_body
 ```
 
 
-### Sample Response
+## Responses
+
+**Sample Successful Response**
 
 ```json
+
+/* Completed 201 */
 {
   "data": {
-    "id": "5",
+    "id": "12",
     "type": "teams",
     "attributes": {
-      "name": "cristins fun team",
+      "name": "Murray's Women's Volleyball Squad",
       "sport": "Women's Volleyball",
       "sport-id": 17696,
       "active": true,
@@ -67,8 +112,13 @@ puts response.read_body
       }
     },
     "links": {
-      "self": "/api/team_edition/teams/5"
+      "self": "/api/team_edition/teams/12"
     }
   }
 }
 ```
+
+
+## Errrors/Statuses
+
+See relevant spec files.

@@ -19,16 +19,16 @@ _cURL_
 
 ```shell
 curl --request GET \
-  "http://qa.ncsasports.org/api/team_edition/organizations/1/athletes" \
+  --url http://qa.ncsasports.org/api/team_edition/organizations/1/athletes \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
 ```
 
 
 _Ruby Net::Http_
 
 ```ruby
-require 'uri'
+require 'URI'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/organizations/1/athletes")
@@ -44,18 +44,14 @@ puts response.read_body
 ```
 
 
+
+
 ## Responses
-
-**Response Types**
-
-| Status Code                    | Description/Cause                 |
-|--------------------------------|-----------------------------------|
-| 200 OK                         | Successfully retrieved athletess   |
-
 
 **Sample Successful Response**
 
 ```json
+/* 200 ok*/
 {
   "data": [
     {
@@ -369,3 +365,8 @@ puts response.read_body
 }
 ```
 
+
+
+## Errors & Statuses
+
+* For errors, see relevant spec files to flesh out this section.

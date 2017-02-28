@@ -1,52 +1,23 @@
-# Update an organization
+# UPDATE AN ORGANIZATION
 
-**PATCH `/api/team_edition/organizations/3`**
+**PATCH `/api/team_edition/organizations/:organization_id`**
 
 This endpoint is responsible for updating an existing organziation.
 
-## Request
+## Requests
 
 **Headers**
 
-| Header            | Value                         | Required?  |
-|:------------------|:------------------------------|:-----------|
-| _Content-Type_    | application/vnd.api+json      | `true`     |
-
-<br>
-
-**Data Attributes**
-
-| Parameter           | `Type`      | Required?     | Description           |
-|:------------------- |:------------|:--------------|:----------------------|
-| `email`             | String      | `true`        |                       |
-| `password`          | String      | `true`        |                       |
-| `attributes`        | Hash        | `true`        |                       |
-| `attribute["name"]` | String      | `false`       | organization's name   |
-
-
-**Organization Attributes**
-
-
-```ruby
-    :name,
-    :zip_code,
-    :address,
-    :city,
-    :state,
-    :email,
-    :phone,
-    :website
-  ```
-
-
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
 
 
 **Sample Request Payload**
 
-<aside class="notice>Must meet the JSON Api spec requirements for <a href="http://jsonapi.org/format/#crud-updating">updating a resource</a></aside>
-
-
 ```json
+/* for updating "name"*/
 {
   "data": {
     "type": "organizations",
@@ -58,43 +29,46 @@ This endpoint is responsible for updating an existing organziation.
 }
 ```
 
-``
-#### 1. cURL (for updating `organization.name`)
+**Code Examples**
+
+_cURL_
 
 ```shell
 curl --request PATCH \
-  --url http://qa.ncsasports.org/api/team_edition/organizations/1 \
+  --url http://qa.ncsasports.org/api/team_edition/organizations/3 \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9' \
-  --data '{"data":{"type":"organizations","id":"1","attributes":{"name":"Spree Volleyball Club"}}}'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
+  --data-binary '{"data":{"type":"organizations","id":"3","attributes":{"name":"Murrays Volleyball Club"}}}' \
 ```
 
 
-#### 2. Ruby Net::HTTP (for updating `organization.name`)
+_Ruby Net::HTTP_
 
 ```ruby
-require 'uri'
+require 'URI'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/organizations/1")
-
+options = {"data":{"type":"organizations","id":"3","attributes":{"name":"Murrays Volleyball Club"}}}
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Patch.new(url)
 request["content-type"] = 'application/vnd.api+json'
-request["session-token"] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
-request.body = "{\"data\":{\"type\":\"organizations\",\"id\":\"1\",\"attributes\":{\"name\":\"Spree Volleyball Club\"}}}"
+request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
+request.body = options.to_json
 
 response = http.request(request)
 puts response.read_body
 ```
 
-<br>
-<br>
 
 ## Response
 
 **Sample Success Response**
 
+`Status: 204 No Content`
 
-`Status Code: 204 No Content`
+
+## Errrors/Statuses
+
+See relevant spec files.
