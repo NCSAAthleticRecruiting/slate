@@ -1,11 +1,6 @@
-# Create OrganizationContract
-<br>
+# CREATE ORGANIZATION CONTRACT
 
-## _Overview_
-
-* `POST /api/team_edition/organizations/[:organization_id]/organization_contracts`
-
-
+**POST `/api/team_edition/organizations/:organization_id/organization_contracts`**
 
 ## Requests
 
@@ -17,29 +12,110 @@
 | `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
 
 
+**Required Data**
+* `type` ('organization_contracts')
+* attributes
+  - `start_date`
+  - `first_payment_date`
+  - `number_of_payments`
+  - `number_of_teams`
+  - `modifier`
+  - `amount`
+* relationships
+  - `organization`
+  - `sport`
+
+
 **Sample Request Body**
 
 ```json
 {
   "data": {
+    "type": "organization_contracts",
     "attributes": {
-      "current-contract-amount": "2160.0",
-      "end-date": "2018-02-20",
-      "modifier": "1.0",
-      "number-of-athletes": 0,
-      "number-of-payments": 1,
-      "number-of-teams": 1,
-      "sport-name": "Soccer",
-      "start-date": "2017-02-20"
-    },
-    "id": "1",
-    "links": {
-      "self": "/api/team_edition/organization_contracts/1"
+      "start_date": "2017-02-28",
+      "first_payment_date": "2017-02-28",
+      "number_of_payments": "2",
+      "number_of_teams": "5",
+      "modifier": 1,
+      "amount": 9300
     },
     "relationships": {
       "organization": {
         "data": {
-          "id": "2",
+          "type": "organizations",
+          "id": "4"
+        }
+      },
+      "sport": {
+        "data": {
+          "type": "sports",
+          "id": "3"
+        }
+      }
+    }
+  }
+}
+```
+
+
+**Code Examples**
+
+_cURL_
+
+```shell
+curl --request POST \
+--url http://qa.ncsasports.org/api/team_edition/organizations/4/organization_contracts \
+--header'content-type: application/vnd.api+json' \
+--header'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
+--data-binary '{"data":{"type":"organization_contracts","attributes":{"start_date":"2017-02-28","first_payment_date":"2017-02-28","number_of_payments":"2","number_of_teams":"5","modifier":1,"amount":9300},"relationships":{"organization":{"data":{"type":"organizations","id":"4"}},"sport":{"data":{"type":"sports","id":"3"}}}}}' \
+```
+
+
+_Ruby Net::Http_
+
+```ruby
+require 'URI'
+require 'net/http'
+
+url = URI("http://qa.ncsasports.org/api/team_edition/organizations/4/organization_contracts")
+options = {"data":{"type":"organization_contracts","attributes":{"start_date":"2017-02-28","first_payment_date":"2017-02-28","number_of_payments":"2","number_of_teams":"5","modifier":1,"amount":9300},"relationships":{"organization":{"data":{"type":"organizations","id":"4"}},"sport":{"data":{"type":"sports","id":"3"}}}}}
+
+http = Net::HTTP.new(url.host, url.port)
+
+request = Net::HTTP::Post.new(url)
+request["session-token"] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+request["content-type"] = 'application/vnd.api+json'
+request.body = options.to_json
+
+response = http.request(request)
+puts response.read_body
+```
+
+## Responses
+
+**Sample Successful Response**
+
+```json
+/* 201 Created */
+{
+  "data": {
+    "id": "5",
+    "type": "organization-contracts",
+    "attributes": {
+      "start-date": "2017-02-28",
+      "end-date": "2018-02-28",
+      "modifier": "1.0",
+      "number-of-payments": 2,
+      "number-of-teams": 5,
+      "number-of-athletes": 0,
+      "current-contract-amount": "9300.0",
+      "sport-name": "Soccer"
+    },
+    "relationships": {
+      "organization": {
+        "data": {
+          "id": "4",
           "type": "organizations"
         }
       },
@@ -50,77 +126,12 @@
         }
       }
     },
-    "type": "organization-contracts"
+    "links": {
+      "self": "/api/team_edition/organization_contracts/5"
+    }
   },
   "links": {
-    "self": "/api/team_edition/organization_contracts/1"
-  }
-}
-```
-
-
-<br>
-## _Sample Successful Requests_
-
-#### 1. cURL
-
-```shell
-curl --request POST \
-  --url http://qa.ncsasports.org/api/team_edition/organizations/2/organization_contracts \
-  --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
-  --data-binary '{"data":{"type":"organization_contracts","attributes":{"start_date":"2017-02-20","first_payment_date":"2017-02-20","number_of_payments":1,"number_of_teams":"1","modifier":1,"amount":2160},"relationships":{"organization":{"data":{"type":"organizations","id":"2"}},"sport":{"data":{"type":"sports","id":"3"}}}}}'
-```
-
-
-#### 2. Ruby Net::HTTP
-
-```ruby
-require 'uri'
-require 'net/http'
-
-url = URI("http://qa.ncsasports.org/api/team_edition/organizations/2/organization_contracts")
-
-http = Net::HTTP.new(url.host, url.port)
-
-request = Net::HTTP::Post.new(url)
-request["session-token"] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
-request["content-type"] = 'application/vnd.api+json'
-request.body = "{\"data\":{\"type\":\"organization_contracts\",\"attributes\":{\"start_date\":\"2017-02-20\",\"first_payment_date\":\"2017-02-20\",\"number_of_payments\":1,\"number_of_teams\":\"1\",\"modifier\":1,\"amount\":2160},\"relationships\":{\"organization\":{\"data\":{\"type\":\"organizations\",\"id\":\"2\"}},\"sport\":{\"data\":{\"type\":\"sports\",\"id\":\"3\"}}}}}"
-
-response = http.request(request)
-puts response.read_body
-```
-
-<br>
-<br>
-
-## _Sample Successful Response_
-
-```json
-{
-  "data": {
-    "id": "2",
-    "type": "organizations",
-    "attributes": {
-      "name": "Lincoln Park Women's Soccer",
-      "zip-code": "60642",
-      "address": "1333 N. Kingsbury Street",
-      "city": "Chicago",
-      "state": "IL",
-      "email": "cristinoconnor@me.com",
-      "phone": "5036805403",
-      "website": "http://fakesoccerclub.com",
-      "logo-url": "/images/default_organization_image.png",
-      "current-contract-ids": [],
-      "sports": [
-        "Women's Soccer"
-      ],
-      "primary-contact-name": null
-    },
-    "links": {
-      "self": "/api/team_edition/organizations/2"
-    }
+    "self": "/api/team_edition/organization_contracts/5"
   }
 }
 ```

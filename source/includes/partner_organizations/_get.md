@@ -1,6 +1,6 @@
-# GET _PartnerOrganization_
+# GET PARTNER ORGANIZATION
 
-**GET `/api/team_edition/partners/[:partner_id]/organizations`**
+**GET `/api/team_edition/partners/:partner_id/organizations`**
 
 This endpoint shows all the possible pricing tiers for a given sport.
 
@@ -21,7 +21,7 @@ _cURL_
 ```shell
 curl --request GET \
   --url http://qa.ncsasports.org/api/team_edition/partners/1/organizations \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
   --header 'content-type: application/vnd.api+json' \
 ```
 
@@ -43,8 +43,6 @@ request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
 response = http.request(request)
 puts response.read_body
 ```
-
-
 
 
 ## Responses
@@ -84,3 +82,9 @@ puts response.read_body
   }
 }
 ```
+
+
+
+## Errrors/Statuses
+
+See relevant spec files.

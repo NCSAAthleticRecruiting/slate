@@ -1,6 +1,6 @@
 # REFRESH ATHLETE DATA
 
-**GET `/api/team_edition/organizations/[:organization_id]/refresh_athletes`**
+**GET `/api/team_edition/organizations/:organization_id/refresh_athletes`**
 
 ## Requests
 
@@ -20,14 +20,14 @@ _cURL_
 curl --request GET \
   --url http://qa.ncsasports.org/api/team_edition/organizations/1/refresh_athletes \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
 ```
 
 
 _Ruby Net::Http_
 
 ```ruby
-require 'uri'
+require 'URI'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/organizations/1/refresh_athletes")
@@ -35,7 +35,7 @@ url = URI("http://qa.ncsasports.org/api/team_edition/organizations/1/refresh_ath
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Get.new(url)
-request["session-token"] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
 request["content-type"] = 'application/vnd.api+json'
 
 response = http.request(request)

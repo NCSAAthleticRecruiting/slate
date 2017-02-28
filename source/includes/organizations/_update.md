@@ -1,6 +1,6 @@
 # UPDATE AN ORGANIZATION
 
-**PATCH `/api/team_edition/organizations/3`**
+**PATCH `/api/team_edition/organizations/:organization_id`**
 
 This endpoint is responsible for updating an existing organziation.
 
@@ -14,36 +14,10 @@ This endpoint is responsible for updating an existing organziation.
 | `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
 
 
-<!-- **Data Attributes**
-
-| Parameter           | `Type`      | Required?     | Description           |
-|:------------------- |:------------|:--------------|:----------------------|
-| `email`             | String      | `true`        |                       |
-| `password`          | String      | `true`        |                       |
-| `attributes`        | Hash        | `true`        |                       |
-| `attribute["name"]` | String      | `false`       | organization's name   |
-
- -->
-<!-- **Organization Attributes**
-
-
-```ruby
-    :name,
-    :zip_code,
-    :address,
-    :city,
-    :state,
-    :email,
-    :phone,
-    :website
-  ```
- -->
 **Sample Request Payload**
 
-<aside class="notice>Must meet the JSON Api spec requirements for <a href="http://jsonapi.org/format/#crud-updating">updating a resource</a></aside>
-
-
 ```json
+/* for updating "name"*/
 {
   "data": {
     "type": "organizations",
@@ -55,17 +29,16 @@ This endpoint is responsible for updating an existing organziation.
 }
 ```
 
-
-**Code Examples (for updating "name")**
+**Code Examples**
 
 _cURL_
 
 ```shell
 curl --request PATCH \
-  --url http://qa.ncsasports.org/api/team_edition/organizations/1 \
+  --url http://qa.ncsasports.org/api/team_edition/organizations/3 \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9' \
-  --data '{"data":{"type":"organizations","id":"1","attributes":{"name":"Spree Volleyball Club"}}}'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
+  --data-binary '{"data":{"type":"organizations","id":"3","attributes":{"name":"Murrays Volleyball Club"}}}' \
 ```
 
 
@@ -76,13 +49,13 @@ require 'uri'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/organizations/1")
-
+options = {"data":{"type":"organizations","id":"3","attributes":{"name":"Murrays Volleyball Club"}}}
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Patch.new(url)
 request["content-type"] = 'application/vnd.api+json'
-request["session-token"] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
-request.body = "{\"data\":{\"type\":\"organizations\",\"id\":\"1\",\"attributes\":{\"name\":\"Spree Volleyball Club\"}}}"
+request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
+request.body = options.to_json
 
 response = http.request(request)
 puts response.read_body
@@ -93,8 +66,7 @@ puts response.read_body
 
 **Sample Success Response**
 
-
-`Status Code: 204 No Content`
+`Status: 204 No Content`
 
 
 ## Errrors/Statuses

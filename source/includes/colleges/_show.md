@@ -1,6 +1,6 @@
 # GET A COLLEGE
 
-**GET `/api/team_edition/organizations/:organization_id/colleges/[:college_id]`**
+**GET `/api/team_edition/organizations/:organization_id/colleges/:college_id`**
 
 This endpoint gets a college's detailed information.
 
@@ -19,7 +19,7 @@ _cURL_
 
 ```shell
 curl --request GET \
-  "http://qa.ncsasports.org/api/team_edition/organizations/1/colleges/16038" \
+  --url http://qa.ncsasports.org/api/team_edition/organizations/1/colleges/16038 \
   --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
   --header 'content-type: application/vnd.api+json' \
 ```

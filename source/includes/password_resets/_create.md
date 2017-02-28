@@ -12,9 +12,11 @@ This endpoint handles resetting a user's password if the user has forgotten it a
 |-----------------|-----------|----------------------------|
 | `Content-Type`  | true      | application/vnd.api+json   |
 
-**Required Attributes**
+**Required Data**
 
-* `attributes['email']`
+* `attributes`
+  - `email`
+* `type` ('sessions')
 
 **Sample Request Payload**
 
@@ -35,27 +37,28 @@ _cURL_
 
 ```shell
 curl --request POST \
-  "http://qa.ncsasports.org/api/team_edition/password_resets" \
+  --url http://qa.ncsasports.org/api/team_edition/password_resets \
   --header 'content-type: application/vnd.api+json' \
   --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
-  --data '{"data":{"type":"sessions","attributes":{"email":"billmurray@example.com"}}}'
+  --data-binary '{"data":{"type":"sessions","attributes":{"email":"billmurray@example.com"}}}' \
 ```
 
 
 _Ruby Net::Http_
 
 ```ruby
-require 'uri'
+require 'URI'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/password_resets")
+options =  {"data":{"type":"sessions","attributes":{"email":"billmurray@example.com"}}}
 
 http = Net::HTTP.new(url.host, url.port)
 
-request = Net::HTTP::POST.new(url)
+request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/vnd.api+json'
 request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
-request.body = "{"data":{"type":"sessions","attributes":{"email":"billmurray@example.com"}}}"
+request.body = options.to_json
 
 response = http.request(request)
 puts response.read_body
@@ -64,16 +67,16 @@ puts response.read_body
 
 ## Responses
 
-**Response Types**
-
-| Status Code               | Description/Cause                                     |
-|---------------------------|-------------------------------------------------------|
-| 200 OK                    | Reset password email was successfully sent out        |
-
 
 **Sample Successful Response**
 
 ```json
-/* Emptiness */
+/* 200 OK */
 {}
 ```
+
+
+
+## Errrors/Statuses
+
+See relevant spec files.

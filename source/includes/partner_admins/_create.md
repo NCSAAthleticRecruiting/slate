@@ -1,6 +1,6 @@
 # CREATE A PARTNER ADMIN
 
-**POST `/api/team_edition/partners/[:partner_id]/partner_admins`**
+**POST `/api/team_edition/partners/:partner_id/partner_admins`**
 
 ## Requests
 
@@ -11,11 +11,15 @@
 | `Content-Type`  | true      | application/vnd.api+json   |
 | `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
 
-**Required Attributes**
+**Required Data**
 
-* `attributes['first_name']`
-* `attributes['last_name']`
-* `attributes['email']`
+* `attributes`
+  - `first_name`
+  - `last_name`
+  - `email`
+* `id`
+* `type` ('partner_admins')
+* `relationships['partner']`
 
 **Sample Request Body**
 
@@ -48,17 +52,17 @@ _cURL_
 
 ```shell
 curl --request POST \
-  "http://qa.ncsasports.org/api/team_edition/partners/1/partner_admins" \
+  --url http://qa.ncsasports.org/api/team_edition/partners/1/partner_admins \
   --header 'content-type: application/vnd.api+json' \
   --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9' \
-  --data-binary '{"data":{"type":"partner_admins","attributes":{"first_name":"Justice","last_name":"Johnson","email":"justjo@example.com"},"relationships":{"partner":{"data":{"type":"partners"}}}}}'
+  --data-binary '{"data":{"type":"partner_admins","attributes":{"first_name":"Justice","last_name":"Johnson","email":"justjo@example.com"},"relationships":{"partner":{"data":{"type":"partners"}}}}}' \
 ```
 
 
 _Ruby Net::Http_
 
 ```ruby
-require 'uri'
+require 'URI'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/partners/1/partner_admins")
@@ -66,8 +70,8 @@ url = URI("http://qa.ncsasports.org/api/team_edition/partners/1/partner_admins")
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Post.new(url)
-request["session-token"] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
 request["content-type"] = 'application/vnd.api+json'
+request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
 request.body = "{\"data\":{\"type\":\"partner_admins\",\"attributes\":{\"first_name\":\"Justice\",\"last_name\":\"Johnson\",\"email\":\"justjo@example.com\"},\"relationships\":{\"partner\":{\"data\":{\"type\":\"partners\"}}}}}"
 
 response = http.request(request)

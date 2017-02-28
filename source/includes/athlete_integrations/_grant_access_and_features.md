@@ -21,7 +21,7 @@ _cURL_
 
 ```shell
 curl --request PUT \
-  "http://qa.ncsasports.org/api/team_edition/athletes/53725/grant_access_and_features" \
+  --url http://qa.ncsasports.org/api/team_edition/athletes/53725/grant_access_and_features \
   --header 'Content-Type: application/vnd.api+json' \
   --header 'Session-Token: eyJ0eXAiOiJKV1QiLCJ...' \
 ```
@@ -31,14 +31,14 @@ curl --request PUT \
 _Ruby Net::HTTP_
 
 ```ruby
-require 'uri'
+require 'URI'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/athletes/53725/grant_access_and_features")
 
 http = Net::HTTP.new(url.host, url.port)
 
-request = Net::HTTP::PUT.new(url)
+request = Net::HTTP::Put.new(url)
 request['content-type'] = 'application/vnd.api+json'
 request['session-token'] = 'eyJ0eXAiOiJKV1QiLCJ...'
 
@@ -59,6 +59,9 @@ puts response.read_body
 }
 ```
 
+
+## Errors & Statuses
+
 **404**
 
 Meaning: athlete with the id provided could not be found. double check that you have the right athlete.
@@ -68,3 +71,5 @@ Meaning: athlete with the id provided could not be found. double check that you 
   "details": "No athlete found"
 }
 ```
+
+* For more errors and statuses, see relevant spec files to flesh out this section.

@@ -15,11 +15,12 @@ This endpoint is responsible for the control flow once a user submits the login 
 | `Content-Type`  | true      | application/vnd.api+json   |
 
 
+**Required Data**
 
-**Required Attributes**
-
-* `attributes['email']`
-* `attributes['password']`
+* `attributes`
+  - `email`
+  - `password`
+* `type` ('sessions')
 
 
 **Sample Request Payload**
@@ -42,9 +43,9 @@ _cURL_
 
 ```shell
 curl --request POST \
-  "http://qa.ncsasports.org/api/team_edition/sign_in" \
+  --url http://qa.ncsasports.org/api/team_edition/sign_in \
   --header 'Content-Type: application/vnd.api+json' \
-  --data '{"data":{"type":"sessions","attributes":{"email":"mia@example.com","password":"password"}}}'
+  --data '{"data":{"type":"sessions","attributes":{"email":"mia@example.com","password":"password"}}}' \
 ```
 
 <br>
@@ -55,12 +56,14 @@ _Ruby Net::Http_
 require 'uri'
 require 'net/http'
 
-http = Net::HTTP.new(url.host, url.port)
-request = Net::HTTP::Post.new(url)
 
-request['content-type'] = 'application/vnd.api+json'
+url = URI("http://qa.ncsasports.org/api/team_edition/sign_in")
 options = {"data":{"type":"sessions","attributes":{"email":"mia@example.com","password":"password"}}}
 
+http = Net::HTTP.new(url.host, url.port)
+
+request = Net::HTTP::Post.new(url)
+request['content-type'] = 'application/vnd.api+json'
 request.body = options.to_json
 
 response = http.request(request)

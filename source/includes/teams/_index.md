@@ -20,9 +20,9 @@ _cURL_
 
 ```shell
 curl --request GET \
-  "http://qa.ncsasports.org/api/team_edition/organizations/1/teams" \
+  --url http://qa.ncsasports.org/api/team_edition/organizations/1/teams \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
 ```
 
 
@@ -47,17 +47,10 @@ puts response.read_body
 
 ## Responses
 
-**Response Types**
-
-| Status Code                    | Description/Cause                 |
-|--------------------------------|-----------------------------------|
-| 200 OK                         | Successfully retrieved teams      |
-| 404 Not Found                  | organization_id doesn't exist     |
-
-
 **Sample Successful Response**
 
 ```json
+/* 200 OK */
 {
   "data": [
     {
@@ -155,6 +148,15 @@ puts response.read_body
 }
 
 ```
+
+
+
+**Response Types**
+
+| Status Code                    | Description/Cause                 |
+|--------------------------------|-----------------------------------|
+| 200 OK                         | Successfully retrieved teams      |
+| 404 Not Found                  | organization_id doesn't exist     |
 
 
 ## Errors & Statuses
