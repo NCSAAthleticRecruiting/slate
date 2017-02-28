@@ -41,11 +41,8 @@ response = http.request(request)
 puts response.read_body
 ```
 
-<br>
-<br>
 
 ## Responses
-
 
 **Sample Successful Response**
 
