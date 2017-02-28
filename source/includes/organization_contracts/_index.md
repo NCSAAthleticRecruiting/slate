@@ -29,7 +29,7 @@ curl --request GET \
 _Ruby Net::Http_
 
 ```ruby
-require 'uri'
+require 'URI'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/organizations/2/organization_contracts")

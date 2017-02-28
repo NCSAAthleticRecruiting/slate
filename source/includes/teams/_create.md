@@ -13,6 +13,15 @@ This endpoint creates a team for an organization.
 | `Content-Type`  | true      | application/vnd.api+json   |
 | `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
 
+**Required Data**
+
+* attributes
+  - `name`
+* `type` ('teams')
+* relationships
+  - `organization`
+  - `organization_sport`
+
 
 **Sample Request Payload**
 

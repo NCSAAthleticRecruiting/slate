@@ -77,7 +77,9 @@ puts response.read_body
 }
 ```
 
+**Errors**
 
-## Errors & Statuses
+| Status           | Meaning                           |
+|------------------|-----------------------------------|
+| 404 Not Found    | Couldn't find team with id in url |
 
-* For errors, see relevant spec files to flesh out this section.

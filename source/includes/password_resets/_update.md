@@ -2,7 +2,7 @@
 
 **PATCH `/api/team_edition/password_resets'`**
 
-This endpoint handles updating a user's password once they've clicked the reset password button in the email they received (that gets sent via `POST /api/team_edition/password_resets/`) a user that has clicked through the reset password email.
+This endpoint will update a user's password after their first login.
 
 ## Requests
 
@@ -13,22 +13,15 @@ This endpoint handles updating a user's password once they've clicked the reset 
 | `Content-Type`  | true      | application/vnd.api+json   |
 | `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
 
-**Required Data**
-
-* `attributes`
-  - `password`
-  - `password_reset_token`
-* `type` (either 'coaches' or 'partner_admins')
 
 **Sample Request Payload**
 
 ```json
 {
   "data": {
-    "type": "coaches",
+    "type": "password_resets",
     "attributes": {
-      "password": "password",
-      "password_reset_token": "MBxT7VJQ8DfqNsdXXwuHcA"
+      "password": "password"
     }
   }
 }
@@ -43,7 +36,7 @@ _cURL_
 curl --request PATCH \
   --url http://qa.ncsasports.org/api/team_edition/password_resets \
   --header 'content-type: application/vnd.api+json' \
-  --data-binary '{"data":{"type":"coaches","attributes":{"password":"password","password_reset_token":"MBxT7VJQ8DfqNsdXXwuHcA"}}}' \
+  --data-binary '{"data":{"type":"password_resets","attributes":{"password":"password"}}}' \
 ```
 
 
@@ -54,12 +47,13 @@ require 'URI'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/password_resets")
+options = {"data":{"type":"password_resets","attributes":{"password":"password"}}}
 
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Patch.new(url)
 request["content-type"] = 'application/vnd.api+json'
-request.body = "{\"data\":{\"type\":\"coaches\",\"attributes\":{\"password\":\"password\",\"password_reset_token\":\"MBxT7VJQ8DfqNsdXXwuHcA\"}}}"
+request.body = options.to_json
 
 response = http.request(request)
 puts response.read_body
@@ -72,11 +66,11 @@ puts response.read_body
 ```json
 {
   "data": {
-    "id": "72",
+    "id": "2",
     "type": "sessions",
     "attributes": {
       "session-type": "coach",
-      "token": "eyJ0eXAiOiJKV1QiLC..."
+      "token": "eyJ0eXAiOiJKV1QiLCiJ9..."
     },
     "links": {
       "self": "/api/team_edition/sign_in"

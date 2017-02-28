@@ -13,6 +13,7 @@ This endpoint retrieves information about coaches the athlete has received messa
 | `Content-Type`  | true      | application/vnd.api+json   |
 | `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
 
+
 **Code Examples**
 
 _cURL_

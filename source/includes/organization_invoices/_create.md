@@ -80,7 +80,10 @@ puts response.read_body
 {}
 ```
 
-
 ## Errrors/Statuses
 
-See relevant spec files.
+| Status        | Response Body                                  | Cause                                                  |
+|---------------|------------------------------------------------|--------------------------------------------------------|
+| 404 Not Found | `{"details": "No OrganizationContract found"}` | organization_contract with provided id does not exist. |
+| 404 Not Found | `{}`                                           | organization with provied id does not exist.           |
+| 201 Created   | `{}`                                           | success!                                               |
