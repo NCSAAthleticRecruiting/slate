@@ -62,7 +62,7 @@ curl --request POST \
   --url http://qa.ncsasports.org/api/team_edition/athletes/5/evaluation \
   --header 'content-type: application/vnd.api+json' \
   --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
-  --data-binary '{"data":{"type":"evaluation","attributes":{"rating":6},"relationships":{"athlete":{"data":{"type":"athletes","id":"5"}},"organization":{"data":{"type":"organizations","id":"1"}}}}}'
+  --data-binary '{"data":{"type":"evaluation","attributes":{"rating":6},"relationships":{"athlete":{"data":{"type":"athletes","id":"5"}},"organization":{"data":{"type":"organizations","id":"1"}}}}}' \
 ```
 
 <br>

@@ -23,7 +23,7 @@ curl --request POST \
   --url http://qa.ncsasports.org/api/team_edition/athletes/110/recommendation \
   --header 'content-type: application/vnd.api+json' \
   --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
-  --data-binary '{"data":{"type":"recommendations","attributes":{"college_id":"15077","action":"create"},"relationships":{"athlete":{"data":{"type":"athletes","id":"110"}},"organization":{"data":{"type":"organizations","id":"15"}}}}}'
+  --data-binary '{"data":{"type":"recommendations","attributes":{"college_id":"15077","action":"create"},"relationships":{"athlete":{"data":{"type":"athletes","id":"110"}},"organization":{"data":{"type":"organizations","id":"15"}}}}}' \
 ```
 
 

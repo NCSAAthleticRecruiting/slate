@@ -21,7 +21,7 @@ This endpoint creates a team for an organization.
   "data": {
     "type": "teams",
     "attributes": {
-      "name": "Murray's Women's Volleyball Squad"
+      "name": "Volleyballers"
     },
     "relationships": {
       "organization": {
@@ -51,7 +51,7 @@ curl --request POST \
   --url http://qa.ncsasports.org/api/team_edition/organizations/1/teams \
   --header 'content-type: application/vnd.api+json' \
   --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
-  --data-binary $'{"data":{"type":"teams","attributes":{"name":"Murray\'s Women\'s Volleyball Squad"},"relationships":{"organization":{"data":{"type":"organizations","id":"1"}},"organization_sport":{"data":{"type":"organization_sports","id":"1"}}}}}'
+  --data-binary '{"data":{"type":"teams","attributes":{"name":"Volleyballers"},"relationships":{"organization":{"data":{"type":"organizations","id":"1"}},"organization_sport":{"data":{"type":"organization_sports","id":"1"}}}}}' \
 ```
 
 
@@ -62,7 +62,7 @@ require 'URI'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/organizations/1/teams")
-options = {"data":{"type":"teams","attributes":{"name":"Murray\'s Women\'s Volleyball Squad"},"relationships":{"organization":{"data":{"type":"organizations","id":"1"}},"organization_sport":{"data":{"type":"organization_sports","id":"1"}}}}}
+options = {"data":{"type":"teams","attributes":{"name":"Volleyballers"},"relationships":{"organization":{"data":{"type":"organizations","id":"1"}},"organization_sport":{"data":{"type":"organization_sports","id":"1"}}}}}
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -88,7 +88,7 @@ puts response.read_body
     "id": "12",
     "type": "teams",
     "attributes": {
-      "name": "Murray's Women's Volleyball Squad",
+      "name": "Volleyballers",
       "sport": "Women's Volleyball",
       "sport-id": 17696,
       "active": true,

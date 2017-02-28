@@ -21,7 +21,7 @@ _cURL_
 curl --request GET \
   --url http://qa.ncsasports.org/api/team_edition/teams/2 \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
 ```
 
 <br>

@@ -24,7 +24,7 @@ curl --request PATCH \
   --url http://qa.ncsasports.org/api/team_edition/teams/5 \
   --header 'content-type: application/vnd.api+json' \
   --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9' \
-  --data-binary '{"data":{"id":"5","type":"teams","attributes":{"name":"the best team"}}}'
+  --data-binary '{"data":{"id":"5","type":"teams","attributes":{"name":"the best team"}}}' \
 ```
 
 __Ruby Net::Http__
