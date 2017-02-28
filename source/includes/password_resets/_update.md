@@ -11,12 +11,14 @@ This endpoint handles updating a user's password once they've clicked the reset 
 | Header          | Required? | Description                |
 |-----------------|-----------|----------------------------|
 | `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
 
-**Required Attributes**
+**Required Data**
 
-* `type`
-* `attributes['password']`
-* `attributes['password_reset_token']`
+* `attributes`
+  - `password`
+  - `password_reset_token`
+* `type` (either 'coaches' or 'partner_admins')
 
 **Sample Request Payload**
 
@@ -39,16 +41,16 @@ _cURL_
 
 ```shell
 curl --request PATCH \
-  "http://qa.ncsasports.org/api/team_edition/password_resets" \
+  --url http://qa.ncsasports.org/api/team_edition/password_resets \
   --header 'content-type: application/vnd.api+json' \
-  --data-binary '{"data":{"type":"coaches","attributes":{"password":"password","password_reset_token":"MBxT7VJQ8DfqNsdXXwuHcA"}}}'
+  --data-binary '{"data":{"type":"coaches","attributes":{"password":"password","password_reset_token":"MBxT7VJQ8DfqNsdXXwuHcA"}}}' \
 ```
 
 
 _Ruby Net::Http_
 
 ```ruby
-require 'uri'
+require 'URI'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/password_resets")
@@ -65,22 +67,7 @@ puts response.read_body
 
 ## Responses
 
-**Response Types**
-
-| Status Code               | Description/Cause               |
-|---------------------------|---------------------------------|
-| 200 OK                    | Successfully updated password   |
-
-
-**Response Data**
-
-* `attributes['session-type']`
-  * `coach` or `partner_admin`
-* `attributes['token']`
-  * the session token (aka the `team_rms_session` cookie)
-
-
-**Sample Response Data**
+**Sample Successful Response**
 
 ```json
 {
@@ -97,3 +84,7 @@ puts response.read_body
   }
 }
 ```
+
+## Errrors/Statuses
+
+See relevant spec files.

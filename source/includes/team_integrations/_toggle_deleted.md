@@ -1,7 +1,8 @@
-# GET A SPECIFIC TEAM
+# SOFT-DELETE A TEAM
 
-**GET `/api/team_edition/teams/:team_id`**
+**PATCH `/api/team_edition/teams/:team_id/toggle_deleted`**
 
+This endpoint soft-deletes a team (sets the `deleted` field value to `true` on the team record). At present this endpoint cannot undo a soft-delete.
 
 ## Requests
 
@@ -13,51 +14,54 @@
 | `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
 
 
-**Code Samples**
+**Code Examples**
 
 _cURL_
 
 ```shell
-curl --request GET \
-  --url http://qa.ncsasports.org/api/team_edition/teams/2 \
+curl --request PATCH \
+  --url http://qa.ncsasports.org/api/team_edition/teams/9/toggle_deleted \
   --header 'content-type: application/vnd.api+json' \
   --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
 ```
 
-<br>
 
 _Ruby Net::Http_
 
 ```ruby
-require 'uri'
+require 'URI'
 require 'net/http'
 
-url = URI("http://qa.ncsasports.org/api/team_edition/teams/2")
+url = URI("http://qa.ncsasports.org/api/team_edition/teams/9/toggle_deleted")
 
 http = Net::HTTP.new(url.host, url.port)
 
-request = Net::HTTP::Get.new(url)
-request["session-token"] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
-request["content-type"] = 'application/vnd.api+json'
+request = Net::HTTP::Patch.new(url)
+request['session-token'] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
+request['content-type'] = 'application/vnd.api+json'
 
 response = http.request(request)
 puts response.read_body
 ```
 
 
-### Sample Response
+
+## Responses
+
+**Sample Successful Response**
 
 ```json
+/* 200 OK */
 {
   "data": {
-    "id": "2",
+    "id": "9",
     "type": "teams",
     "attributes": {
-      "name": "16 Elite",
+      "name": "Murray's Men's Volleyball Team",
       "sport": "Men's Volleyball",
       "sport-id": 17695,
       "active": true,
-      "deleted": false
+      "deleted": true
     },
     "relationships": {
       "organization-sport": {
@@ -68,15 +72,14 @@ puts response.read_body
       }
     },
     "links": {
-      "self": "/api/team_edition/teams/2"
+      "self": "/api/team_edition/teams/9"
     }
   },
   "links": {
-    "self": "http://localhost:3000/api/team_edition/teams/2"
+    "self": "http://localhost:3000/api/team_edition/teams/9"
   }
 }
 ```
-
 
 ## Errors & Statuses
 

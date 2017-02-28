@@ -1,6 +1,6 @@
 # GET ALL CONTRACTS FOR AN ORGANIZATION
 
-**GET `/api/team_edition/organizations/[:organization_id]/organization_contracts`**
+**GET `/api/team_edition/organizations/:organization_id/organization_contracts`**
 
 This endpoint retrieves the team edition contracts that an organization has.
 
@@ -20,9 +20,9 @@ _cURL_
 
 ```shell
 curl --request GET \
-  "http://qa.ncsasports.org/api/team_edition/organizations/2/organization_contracts" \
+  --url http://qa.ncsasports.org/api/team_edition/organizations/2/organization_contracts \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
 ```
 
 
@@ -128,3 +128,8 @@ puts response.read_body
   }
 }
 ```
+
+
+## Errrors/Statuses
+
+See relevant spec files.

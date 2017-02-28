@@ -1,30 +1,32 @@
-# Show _Athlete_
-<br>
+# GET A SINGLE ATHLETE
 
-## _Overview_
+**GET `/api/team_edition/athletes/:athlete_id`**
 
-* `GET /api/team_edition/athletes/[:athlete_id]`
-* Request Headers
-  * `Content-Type`: `application/vnd.api+json`
-  * `Session-Token`: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9`
+## Requests
 
-<br>
-## _Sample Successful Requests_
+**Headers**
 
-#### 1. cURL
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
+
+**Code Examples**
+
+_cURL_
 
 ```shell
 curl --request GET \
   --url http://qa.ncsasports.org/api/team_edition/athletes/1 \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
 ```
 
 
-#### 2. Ruby Net::HTTP
+_Ruby Net::Http_
 
 ```ruby
-require 'uri'
+require 'URI'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/athletes/1")
@@ -32,7 +34,7 @@ url = URI("http://qa.ncsasports.org/api/team_edition/athletes/1")
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Get.new(url)
-request["session-token"] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
 request["content-type"] = 'application/vnd.api+json'
 
 response = http.request(request)
@@ -42,7 +44,10 @@ puts response.read_body
 <br>
 <br>
 
-## _Sample Successful Response_
+## Responses
+
+
+**Sample Successful Response**
 
 ```json
 {
@@ -307,3 +312,9 @@ puts response.read_body
   }
 }
 ```
+
+
+
+## Errors & Statuses
+
+* For errors, see relevant spec files to flesh out this section.

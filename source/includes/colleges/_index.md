@@ -1,7 +1,7 @@
 # GET COLLEGES
 
-**GET `/api/team_edition/organizations/1/colleges`**
-**GET `/api/team_edition/organizations/1/colleges?filter[query]=<SearchTerm>`**
+**GET `/api/team_edition/organizations/:organization_id/colleges`**
+**GET `/api/team_edition/organizations/:organization_id/colleges?filter[query]=<SearchTerm>`**
 
 This endpoint is responsible for getting all colleges or a all colleges matching a query.
 
@@ -17,35 +17,35 @@ This endpoint is responsible for getting all colleges or a all colleges matching
 
 **Query String Parameters**
 
-| Name               | Required? | Description         |
-|--------------------|-----------|---------------------|
-| `filter[query]`    | false     | query string param  |
+* `filter[query]` (not required)
+* `page[number]` (not required)
+
 
 
 **cURL**
 
 ```shell
 curl --request GET \
-  "http://qa.ncsasports.org/api/team_edition/organizations/1/colleges" \
+  --url http://qa.ncsasports.org/api/team_edition/organizations/1/colleges \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
 
 curl --request GET \
-  "http://qa.ncsasports.org/api/team_edition/organizations/1/colleges?filter%5Bquery%5D=portland" \
+  --url http://qa.ncsasports.org/api/team_edition/organizations/1/colleges?filter%5Bquery%5D=portland \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
 ```
 
 
 **Ruby Net::HTTP**
 
 ```ruby
-require 'uri'
+require 'URI'
 require 'net/http'
 
-url = URI("http://localhost:3000/api/team_edition/organizations/2/colleges")
-# Uncomment the below line if you want that url instead
-# url = URI("http://qa.ncsasports.org/api/team_edition/organizations/1/colleges?filter%5Bquery%5D=portland")
+url = URI("http://qa.ncsasports.org/api/team_edition/organizations/1/colleges?filter%5Bquery%5D=portland")
+# Uncomment the below line if you want a search url instead
+# url = URI("http://localhost:3000/api/team_edition/organizations/1/colleges")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -60,18 +60,12 @@ puts response.read_body
 
 ## Responses
 
-**Response Types**
-
-| Status Code                    | Description/Cause                 |
-|--------------------------------|-----------------------------------|
-| 200 OK                         | Successfully retrieved colleges   |
-
-
 **Sample Successful Response**
 
 url: `http://qa.ncsasports.org/api/team_edition/organizations/1/colleges?filter[query]=portland`
 
 ```json
+/* 200 OK */
 {
   "data": [
     {
@@ -326,4 +320,6 @@ url: `http://qa.ncsasports.org/api/team_edition/organizations/1/colleges?filter[
 
 
 
+## Errors & Statuses
 
+* For errors, see relevant spec files to flesh out this section.

@@ -2,22 +2,29 @@
 
 **GET `/api/team_edition/organization_sports/:sport_id/evaluation_guidelines`**
 
-### Sample Requests
+This endpoint retrieves the evaluation guidelines for a given sport in an organization.
 
-**cURL**
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
+
+**Code Examples**
+
+_cURL_
 
 ```shell
-curl --request PUT \
+curl --request GET \
   --url http://qa.ncsasports.org/api/team_edition/organization_sports/17695/evaluation_guidelines \
+  --header 'Session-Token: eyJ0eXAiOiJKV1QiLCiJ9...' \
   --header 'Content-Type: application/vnd.api+json' \
-  --header 'Session-Token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9' \
 ```
 
 
-**Ruby Net::Http**
+_Ruby Net::Http_
 
 ```ruby
-require 'uri'
+require 'URI'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/organization_sports/17695/evaluation_guidelines")
@@ -25,14 +32,16 @@ url = URI("http://qa.ncsasports.org/api/team_edition/organization_sports/17695/e
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Get.new(url)
-request["session-token"] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
 request["content-type"] = 'application/vnd.api+json'
 
 response = http.request(request)
 puts response.read_body
 ```
 
-### Sample Response
+## Responses
+
+**Sample Successful Response**
 
 ```json
 {
@@ -74,3 +83,9 @@ puts response.read_body
   }
 }
 ```
+
+
+
+## Errrors/Statuses
+
+See relevant spec files.

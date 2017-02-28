@@ -1,114 +1,157 @@
-# Show Preferences
+# SHOW PREFERENCES FOR ATHLETE
 
-**GET /api/team_edition/athletes/:athlete_id/preferences`**
+**GET `/api/team_edition/athletes/:athlete_id/preferences`**
 
-This endpoint retrieves the athlete's preferences.
+This endpoint retrieves the athlete's preferences regarding colleegs.
 
+## Requests
 
-### Sample Request Headers
-
-<aside class="notice">The session token is stored in a cookie named `team_rms_session`</aside>
-
-| Header            | Value                      | Required? |
-|-------------------|----------------------------|-----------|
-| _Session-Token_   | eyJ0eXAiOiJKV1QiLCJhbG...  | `true`    |
-| _Content-Type_    | application/vnd.api+json   | `true`    |
+| Header          | Required? | Description                |
+|-----------------|-----------|----------------------------|
+| `Content-Type`  | true      | application/vnd.api+json   |
+| `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
 
 
-### Sample Request Parameters
+**Code Examples**
 
-| Parameter    | Required? | Description         |
-|:------------:|:---------:|:-------------------:|
-|`athlete_id`  | 120       | query string param  |
-
-
-### Request Examples
-
-**cURL**
+_cURL_
 
 ```shell
 curl --request GET \
-  --url http://qa.ncsasports.org/api/team_edition/athletes/5/preferences \
-  --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+  --url http://qa.ncsasports.org/api/team_edition/athletes/6/preferences \
+  --header 'content-type: application/vnd.api+json'\
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
 ```
 
-<br>
-
-**Ruby Net::HTTP**
+_Ruby Net::HTTP_
 
 ```ruby
 require 'uri'
 require 'net/http'
 
-url = URI("http://qa.ncsasports.org/api/team_edition/athletes/5/preferences")
+url = URI("http://qa.ncsasports.org/api/team_edition/athletes/6/preferences")
 
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Get.new(url)
-request["session-token"] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
 request["content-type"] = 'application/vnd.api+json'
+request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
 
 response = http.request(request)
 puts response.read_body
 ```
 
-<br>
 
-## _Sample Successful Response_
+## Responses
+
+**Sample Successful Response**
 
 ```json
 {
   "data": {
-    "id": "5",
+    "id": "6",
     "type": "athlete-preferences",
     "attributes": {
-      "athletic-selectivity": [],
-      "academic-selectivity": [],
-      "college-setting": [],
-      "college-type": [],
-      "major": [],
-      "enrollment-min": null,
-      "enrollment-max": null,
-      "location": [],
-      "id": 5
+      "athletic-selectivity": [
+        "NCAA II",
+        "NCAA III",
+        "NAIA"
+      ],
+      "academic-selectivity": [
+        "Most Selective"
+      ],
+      "college-setting": [
+        "Urban",
+        "Suburban",
+        "Rural"
+      ],
+      "college-type": [
+        "Military",
+        "Historically Black",
+        "Men Only"
+      ],
+      "major": [
+        "Foreign Languages, Literatures, and Linguistics"
+      ],
+      "enrollment-min": 2000,
+      "enrollment-max": 1000000,
+      "location": [
+        {
+          "state": "ME",
+          "preference": "maybe"
+        },
+        {
+          "state": "ND",
+          "preference": "maybe"
+        },
+        {
+          "state": "OK",
+          "preference": "maybe"
+        },
+        {
+          "state": "SD",
+          "preference": "maybe"
+        },
+        {
+          "state": "TX",
+          "preference": "maybe"
+        },
+        {
+          "state": "WY",
+          "preference": "maybe"
+        },
+        {
+          "state": "AR",
+          "preference": "maybe"
+        },
+        {
+          "state": "IL",
+          "preference": "yes"
+        },
+        {
+          "state": "IN",
+          "preference": "yes"
+        },
+        {
+          "state": "ID",
+          "preference": "maybe"
+        },
+        {
+          "state": "NV",
+          "preference": "maybe"
+        },
+        {
+          "state": "OR",
+          "preference": "maybe"
+        },
+        {
+          "state": "UT",
+          "preference": "maybe"
+        },
+        {
+          "state": "WA",
+          "preference": "maybe"
+        }
+      ],
+      "id": 6
+    },
+    "relationships": {
+      "athlete": {
+        "data": {
+          "id": 6,
+          "type": "athletes"
+        }
+      }
     }
   },
   "links": {
-    "self": "/api/team_edition/athletes/5/preferences"
-  },
-  "relationships": {
-    "athlete": {
-      "data": {
-        "id": 5,
-        "type": "athletes"
-      }
-    }
+    "self": "/api/team_edition/athletes/6/preferences"
   }
 }
 ```
 
 
-### Miscellaneous
 
-**Help with JSON API Requests**
+## Errors & Statuses
 
-* <a href="http://jsonapi.org/format/#crud-creating">Creating a RESOURCE</a>
-* <a href="http://jsonapi.org/format/#crud-updating">Updating a RESOURCE</a>
-* <a href="http://jsonapi.org/format/#crud-updating-relationships">Updating RESOURCE Relationships</a>
-* <a href="http://jsonapi.org/format/#crud-deleting">Deleting a RESOURCE</a>
-
-
-Error Code | Meaning
----------- | -------
-400 | Bad Request -- Your request sucks
-401 | Unauthorized -- Your API key is wrong
-403 | Forbidden -- The resource requested is hidden for administrators only
-404 | Not Found -- The specified resource could not be found
-405 | Method Not Allowed -- You tried to access a resource with an invalid method
-406 | Not Acceptable -- You requested a format that isn't json
-410 | Gone -- The resource requested has been removed from our servers
-418 | I'm a teapot
-429 | Too Many Requests -- You're requesting too many resources! Slow down!
-500 | Internal Server Error -- We had a problem with our server. Try again later.
-503 | Service Unavailable -- We're temporarially offline for maintanance. Please try again later.
+See the relevant spec files to flesh this section out.
