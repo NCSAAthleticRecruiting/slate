@@ -1,189 +1,211 @@
 ---
-title: API Reference
+title: Team Edition API Docs
 
 language_tabs:
-  - shell
-  - ruby
-  - python
-  - javascript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
+  - <h2>Tips</h2>
+  - The often-referenced `session-token` header can be found stored in a cookie named `team_rms_session`.<br>
+  - <h2>Helpful Documentation</h2><br>
+  - <strong><a href='http://jsonapi.org'>JSON API Documentation</a></strong>
+  - <strong><a href="http://jsonapi.org/format/#crud-creating">Creating a Resource</a></strong>
+  - <strong><a href="http://jsonapi.org/format/#crud-updating">Updating a Resource</a></strong>
+  - <strong><a href="http://jsonapi.org/format/#crud-updating-relationships">Updating Relationships</a></strong>
+  - <strong><a href="http://jsonapi.org/format/#crud-deleting">Deleting a Resource</a><br><br></strong>
+  - Documentation Powered by <a href='https://github.com/tripit/slate'>Slate</a>
 
 includes:
   - errors
+  - athletes/create
+  - athletes/create_bulk
+  - athletes/index
+  - athletes/refresh_athletes
+  - athletes/show
+  - athletes/get_profile_url
+  - athletes/profile
+  - athletes/activity
+  - athletes/preferences
+  - athletes/get_athlete_teams
+  - athletes/update_athlete_teams
+  - athlete_integrations/recommendation
+  - athlete_integrations/evaluation
+  - athlete_integrations/coach_emails
+  - athlete_integrations/grant_access_and_features
+  - coaches/index
+  - coaches/create
+  - coaches/update
+  - coaches/destroy
+  - colleges/index
+  - colleges/show
+  - ncsa_sports/index
+  - organization_contracts/create
+  - organization_contracts/show
+  - organization_contracts/index
+  - organization_sports/index
+  - organization_sports/evaluation_guidelines
+  - organizations/create
+  - organizations/index
+  - organizations/show
+  - organizations/update
+  - partner_admins/index
+  - partner_admins/create
+  - partners/show
+  - password_resets/create
+  - password_resets/update
+  - ping/respond
+  - pricing_tiers/index
+  - pricing_tiers/tier_sports
+  - public_information/organization
+  - sessions/create
+  - sessions/destroy
+  - team_integrations/toggle_active
+  - team_integrations/toggle_deleted
+  - teams/index
+  - teams/create
+  - teams/show
+  - teams/update
 
 search: true
 ---
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the Team Edition API! You can use our API to access NCSA Team Edition API endpoints.
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+You can view code examples in the dark area to the right.
 
-This example API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
 
-# Authentication
 
-> To authorize, use this code:
+---
 
-```ruby
-require 'kittn'
+## Slate Markdown Syntax
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
+```markdown
+This is a reference for the Markdown syntax used in Slate.
+
+### Headers
+
+For headers:
+
+    # Level 1 Header
+    ## Level 2 Header
+    ### Level 3 Header
+
+Note that only level 1 and 2 headers will appear in the table of contents.
+
+### Paragraph Text
+
+For normal text, just type your paragraph on a single line.
+
+    This is some paragraph text. Exciting, no?
+
+Make sure the lines above and below your paragraph are empty.
+
+### Code Samples
+
+For code samples:
+
+```
+  ```ruby
+  # This is some Ruby code!
+  ```
+
+  ```python
+  # This is some Python code!
+  ```
 ```
 
-```python
-import kittn
+Code samples will appear in the dark area to the right of the main text. We recommend positioning code samples right under headers in your markdown file.
 
-api = kittn.authorize('meowmeowmeow')
+For the full list of supported languages, see [rouge](http://rouge.jneen.net/).
+
+### Code Annotations
+
+For code annotations:
+
+    > This is a code annotation. It will appear in the area to the right, next to the code samples.
+
+Code annotations are essentially the same thing as paragraphs, but they'll appear in the area to the right along with your code samples.
+
+### Tables
+
+Slate uses PHP Markdown Extra style tables:
+
+```markdown
+Table Header 1 | Table Header 2 | Table Header 3
+-------------- | -------------- | --------------
+Row 1 col 1 | Row 1 col 2 | Row 1 col 3
+Row 2 col 1 | Row 2 col 2 | Row 2 col 3
+'```'
+
+Note that the pipes do not need to line up with each other on each line.
+
+If you don't like that syntax, feel free to use normal html `<table>`s directly in your markdown.
+
+### Formatted Text
+
+    This text is **bold**, this is *italic*, this is an `inline code block`.
+
+You can use those formatting rules in code annotations, tables, paragraphs, lists, wherever.
+
+### Lists
+
+    1. This
+    2. Is
+    3. An
+    4. Ordered
+    5. List
+
+    * This
+    * Is
+    * A
+    * Bullet
+    * List
+
+### Links
+
+    This is an [internal link](#error-code-definitions), this is an [external link](http://google.com).
+
+### Notes and Warnings
+
+You can add little highlighted warnings and notes with just a little HTML embedded in your markdown document:
+
+    <aside class="notice">
+    You must replace `meowmeowmeow` with your personal API key.
+    </aside>
+
+Use `class="notice"` for blue notes, `class="warning"` for red warnings, and `class="success"` for green notes.
+
+### Need Help?
+
+If you have trouble with any of the syntax, or if it's confusing, let us know by filing an issue. Thanks!
+
 ```
 
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
 
-```javascript
-const kittn = require('kittn');
 
-let api = kittn.authorize('meowmeowmeow');
-```
 
-> Make sure to replace `meowmeowmeow` with your API key.
+### Miscellaneous
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+**Help with JSON API Requests**
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
+* <a href="http://jsonapi.org/format/#crud-creating">Creating a Resource</a>
+* <a href="http://jsonapi.org/format/#crud-updating">Updating a Resource</a>
+* <a href="http://jsonapi.org/format/#crud-updating-relationships">Updating Resource Relationships</a>
+* <a href="http://jsonapi.org/format/#crud-deleting">Deleting a Resource</a>
 
-`Authorization: meowmeowmeow`
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
+Error Code | Meaning
+---------- | -------
+400 | Bad Request -- Your request sucks
+401 | Unauthorized -- Your API key is wrong
+403 | Forbidden -- The resource requested is hidden for administrators only
+404 | Not Found -- The specified resource could not be found
+405 | Method Not Allowed -- You tried to access a resource with an invalid method
+406 | Not Acceptable -- You requested a format that isn't json
+410 | Gone -- The resource requested has been removed from our servers
+418 | I'm a teapot
+429 | Too Many Requests -- You're requesting too many resources! Slow down!
+500 | Internal Server Error -- We had a problem with our server. Try again later.
+503 | Service Unavailable -- We're temporarially offline for maintanance. Please try again later.
 
