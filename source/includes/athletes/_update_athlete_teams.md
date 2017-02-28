@@ -42,17 +42,16 @@ This endpoint updates the information about teams that an athlete has played on 
 ```
 
 
-
 **Code Examples**
 
 _cURL_
 
 ```shell
 curl --request PATCH \
-  "http://qa.ncsasports.org/api/team_edition/athletes/10/relationships/teams" \
+  --url http://qa.ncsasports.org/api/team_edition/athletes/10/relationships/teams \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...'
-  --data '{"data":[{"type":"teams","id":"2","meta":{"active":true,"primary":true}},{"type":"teams","id":"4","meta":{"active":true,"primary":false}}]}'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
+  --data '{"data":[{"type":"teams","id":"2","meta":{"active":true,"primary":true}},{"type":"teams","id":"4","meta":{"active":true,"primary":false}}]}' \
 ```
 
 <br>
@@ -60,7 +59,7 @@ curl --request PATCH \
 _Ruby Net::Http_
 
 ```ruby
-require 'uri'
+require 'URI'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/athletes/10/relationships/teams")
@@ -82,7 +81,6 @@ puts response.read_body
 **Sample Successful Response**
 
 `Status: 204 No Content`
-
 
 
 ## Errors & Statuses

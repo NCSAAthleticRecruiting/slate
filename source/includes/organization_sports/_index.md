@@ -1,17 +1,8 @@
-# Show all sports (for an organization)
+# SHOW ALL SPORTS FOR AN ORGANIZATION
 
 **GET `/api/team_edition/organizations/:organization_id/organization_sports`**
 
 This endpoint gets all of an organization's sports.
-
-### Sample Request Headers
-
-| Header            | Value                      | Required? |
-|-------------------|----------------------------|-----------|
-| _Session-Token_   | eyJ0eXAiOiJKV1QiLCJhbG...  | `true`    |
-| _Content-Type_    | application/vnd.api+json   | `true`    |
-
-
 
 ## Requests
 
@@ -29,9 +20,9 @@ _cURL_
 
 ```shell
 curl --request GET \
-  "http://qa.ncsasports.org/api/team_edition/organizations/:organization_id/organization_sports" \
+  --url http://qa.ncsasports.org/api/team_edition/organizations/:organization_id/organization_sports \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
 ```
 
 <br>
@@ -39,7 +30,7 @@ curl --request GET \
 _Ruby Net::Http_
 
 ```ruby
-require 'uri'
+require 'URI'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/organizations/1/organization_sports")
@@ -58,14 +49,10 @@ puts response.read_body
 
 ## Responses
 
-**Response Types**
-
-| Status Code                    | Description/Cause                              |
-|--------------------------------|------------------------------------------------|
-| 200 OK                         | Successfully retrieved organization's sports   |
-
+**Sample Successful Response**
 
 ```json
+/* 200 OK */
 {
   "data": [
     {

@@ -1,6 +1,6 @@
 # CREATE A COACH
 
-**POST `/api/team_edition/organizations/[:organization_id]/coaches`**
+**POST `/api/team_edition/organizations/:organization_id/coaches`**
 
 This endpoint creates a coach for an organization.
 
@@ -53,25 +53,25 @@ This endpoint creates a coach for an organization.
 _cURL_
 
 ```shell
-curl --request GET \
-  "http://qa.ncsasports.org/api/team_edition/organizations/1/coaches" \
+curl --request POST \
+  --url http://qa.ncsasports.org/api/team_edition/organizations/1/coaches \
   --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
   --header 'content-type: application/vnd.api+json' \
-  --data-binary '{"data":{"type":"coaches","attributes":{"first_name":"Madeline","last_name":"Bryan", "email":"maddiebryan@example.com", "phone":"", "position_title": "Assistant to the Head Coach", "admin":"false"}, "relationships": {"organization": {"data":{"type":"organizations", "id":"1"}}, "team": {"data": [{"type":"teams", "id":"1"}]}}}}'
+  --data-binary '{"data":{"type":"coaches","attributes":{"first_name":"Madeline","last_name":"Bryan", "email":"maddiebryan@example.com", "phone":"", "position_title": "Assistant to the Head Coach", "admin":"false"}, "relationships": {"organization": {"data":{"type":"organizations", "id":"1"}}, "team": {"data": [{"type":"teams", "id":"1"}]}}}}' \
 ```
 
 
 _Ruby Net::HTTP_
 
 ```ruby
-require 'uri'
+require 'URI'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/organizations/1/coaches")
 
 http = Net::HTTP.new(url.host, url.port)
 
-request = Net::HTTP::Get.new(url)
+request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/vnd.api+json'
 request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
 request.body = "{\"data\":{\"type\":\"coaches\",\"attributes\":{\"first_name\":\"Madeline\",\"last_name\":\"Bryan\",\"email\":\"maddiebryan@example.com\",\"phone\":\"\",\"position_title\":\"Assistant to the Head Coach\",\"admin\":\"false\"},\"relationships\":{\"organization\":{\"data\":{\"type\":\"organizations\",\"id\":\"1\"}},\"team\":{\"data\":[{\"type\":\"teams\",\"id\":\"1\"}]}}}}"

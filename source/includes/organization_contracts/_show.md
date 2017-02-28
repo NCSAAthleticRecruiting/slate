@@ -20,7 +20,7 @@ _cURL_
 
 ```shell
 curl --request GET \
-  "http://qa.ncsasports.org/api/team_edition/organizations/1/organization_contracts" \
+  --url http://qa.ncsasports.org/api/team_edition/organizations/1/organization_contracts \
   --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
   --header 'content-type: application/vnd.api+json' \
 ```
@@ -28,7 +28,7 @@ curl --request GET \
 _Ruby Net::Http_
 
 ```ruby
-require 'uri'
+require 'URI'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/organizations/1/organization_contracts")

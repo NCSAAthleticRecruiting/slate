@@ -30,7 +30,7 @@ curl --request PATCH \
 __Ruby Net::Http__
 
 ```ruby
-require 'uri'
+require 'URI'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/teams/5/")

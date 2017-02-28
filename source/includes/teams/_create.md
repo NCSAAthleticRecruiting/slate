@@ -13,47 +13,82 @@ This endpoint creates a team for an organization.
 | `Content-Type`  | true      | application/vnd.api+json   |
 | `Session-Token` | true      | `eyJ0eXAiOiJKV1QiLCiJ9...` |
 
+
+**Sample Request Payload**
+
+```json
+{
+  "data": {
+    "type": "teams",
+    "attributes": {
+      "name": "Murray's Women's Volleyball Squad"
+    },
+    "relationships": {
+      "organization": {
+        "data": {
+          "type": "organizations",
+          "id": "1"
+        }
+      },
+      "organization_sport": {
+        "data": {
+          "type": "organization_sports",
+          "id": "1"
+        }
+      }
+    }
+  }
+}
+```
+
+
 **Code Examples**
 
-**cURL**
+_cURL_
 
 ```shell
 curl --request POST \
-  "http://qa.ncsasports.org/api/team_edition/organizations/1/teams" \
+  --url http://qa.ncsasports.org/api/team_edition/organizations/1/teams \
   --header 'content-type: application/vnd.api+json' \
   --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
-  --data '{"data":{"type":"teams","attributes":{"name":"cristins fun team"},"relationships":{"organization":{"data":{"type":"organizations","id":"1"}},"organization_sport":{"data":{"type":"organization_sports","id":"1"}}}}}'
+  --data-binary $'{"data":{"type":"teams","attributes":{"name":"Murray\'s Women\'s Volleyball Squad"},"relationships":{"organization":{"data":{"type":"organizations","id":"1"}},"organization_sport":{"data":{"type":"organization_sports","id":"1"}}}}}'
 ```
 
-**Ruby Net::Http**
+
+_Ruby Net::HTTP_
 
 ```ruby
-require 'uri'
+require 'URI'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/organizations/1/teams")
+options = {"data":{"type":"teams","attributes":{"name":"Murray\'s Women\'s Volleyball Squad"},"relationships":{"organization":{"data":{"type":"organizations","id":"1"}},"organization_sport":{"data":{"type":"organization_sports","id":"1"}}}}}
 
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Post.new(url)
 request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
 request["content-type"] = 'application/vnd.api+json'
-request.body = "{\"data\":{\"type\":\"teams\",\"attributes\":{\"name\":\"cristins fun team\"},\"relationships\":{\"organization\":{\"data\":{\"type\":\"organizations\",\"id\":\"1\"}},\"organization_sport\":{\"data\":{\"type\":\"organization_sports\",\"id\":\"1\"}}}}}"
+request.body = options.to_json
 
 response = http.request(request)
 puts response.read_body
 ```
 
 
-### Sample Response
+## Responses
+
+**Sample Successful Response**
 
 ```json
+
+/* Completed 201 */
 {
   "data": {
-    "id": "5",
+    "id": "12",
     "type": "teams",
     "attributes": {
-      "name": "cristins fun team",
+      "name": "Murray's Women's Volleyball Squad",
       "sport": "Women's Volleyball",
       "sport-id": 17696,
       "active": true,
@@ -68,13 +103,13 @@ puts response.read_body
       }
     },
     "links": {
-      "self": "/api/team_edition/teams/5"
+      "self": "/api/team_edition/teams/12"
     }
   }
 }
 ```
 
 
-## Errors & Statuses
+## Errrors/Statuses
 
-* For errors, see relevant spec files to flesh out this section.
+See relevant spec files.

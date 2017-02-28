@@ -14,8 +14,8 @@ This endpoint retrieves the evaluation guidelines for a given sport in an organi
 _cURL_
 
 ```shell
-curl --request PUT \
-  "http://qa.ncsasports.org/api/team_edition/organization_sports/17695/evaluation_guidelines" \
+curl --request GET \
+  --url http://qa.ncsasports.org/api/team_edition/organization_sports/17695/evaluation_guidelines \
   --header 'Session-Token: eyJ0eXAiOiJKV1QiLCiJ9...' \
   --header 'Content-Type: application/vnd.api+json' \
 ```
@@ -24,7 +24,7 @@ curl --request PUT \
 _Ruby Net::Http_
 
 ```ruby
-require 'uri'
+require 'URI'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/organization_sports/17695/evaluation_guidelines")

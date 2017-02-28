@@ -19,7 +19,7 @@ _cURL_
 
 ```shell
 curl --request GET \
-  "http://qa.ncsasports.org/api/team_edition/teams/2" \
+  --url http://qa.ncsasports.org/api/team_edition/teams/2 \
   --header 'content-type: application/vnd.api+json' \
   --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...'
 ```

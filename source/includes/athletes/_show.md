@@ -1,6 +1,6 @@
 # GET A SINGLE ATHLETE
 
-**GET `/api/team_edition/athletes/[:athlete_id]`**
+**GET `/api/team_edition/athletes/:athlete_id`**
 
 ## Requests
 
@@ -19,14 +19,14 @@ _cURL_
 curl --request GET \
   --url http://qa.ncsasports.org/api/team_edition/athletes/1 \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
 ```
 
 
 _Ruby Net::Http_
 
 ```ruby
-require 'uri'
+require 'URI'
 require 'net/http'
 
 url = URI("http://qa.ncsasports.org/api/team_edition/athletes/1")
@@ -34,7 +34,7 @@ url = URI("http://qa.ncsasports.org/api/team_edition/athletes/1")
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Get.new(url)
-request["session-token"] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
 request["content-type"] = 'application/vnd.api+json'
 
 response = http.request(request)

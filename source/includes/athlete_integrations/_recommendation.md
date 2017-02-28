@@ -20,13 +20,12 @@ _cURL_
 
 ```shell
 curl --request POST \
-  "http://qa.ncsasports.org/api/team_edition/athletes/110/recommendation" \
+  --url http://qa.ncsasports.org/api/team_edition/athletes/110/recommendation \
   --header 'content-type: application/vnd.api+json' \
-  --header 'session-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+  --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
   --data-binary '{"data":{"type":"recommendations","attributes":{"college_id":"15077","action":"create"},"relationships":{"athlete":{"data":{"type":"athletes","id":"110"}},"organization":{"data":{"type":"organizations","id":"15"}}}}}'
 ```
 
-<br>
 
 _Ruby Net::HTTP_
 
@@ -39,7 +38,7 @@ url = URI("http://qa.ncsasports.org/api/team_edition/athletes/110/recommendation
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Post.new(url)
-request["session-token"] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+request["session-token"] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
 request["content-type"] = 'application/vnd.api+json'
 request.body = "{\"data\":{\"type\":\"recommendations\",\"attributes\":{\"college_id\":\"15077\",\"action\":\"create\"},\"relationships\":{\"athlete\":{\"data\":{\"type\":\"athletes\",\"id\":\"110\"}},\"organization\":{\"data\":{\"type\":\"organizations\",\"id\":\"15\"}}}}}"
 
@@ -57,3 +56,8 @@ puts response.read_body
   "details":"Recommendation created"
 }
 ```
+
+
+## Errors & Statuses
+
+See the relevant spec files to flesh this section out.
