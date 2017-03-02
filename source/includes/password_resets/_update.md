@@ -36,11 +36,7 @@ _cURL_
 curl --request PATCH \
   --url http://qa.ncsasports.org/api/team_edition/password_resets \
   --header 'content-type: application/vnd.api+json' \
-<<<<<<< HEAD
-  --data-binary '{"data":{"type":"coaches","attributes":{"password":"password","password_reset_token":"MBxT7VJQ8DfqNsdXXwuHcA"}}}' \
-=======
   --data-binary '{"data":{"type":"password_resets","attributes":{"password":"password"}}}' \
->>>>>>> 74170627f4dbc75b0edca1e584a2bb8858a90efa
 ```
 
 
