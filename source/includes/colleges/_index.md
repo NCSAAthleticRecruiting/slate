@@ -17,9 +17,8 @@ This endpoint is responsible for getting all colleges or a all colleges matching
 
 **Query String Parameters**
 
-| Name               | Required? | Description         |
-|--------------------|-----------|---------------------|
-| `filter[query]`    | false     | search term         |
+* `filter[query]` (not required)
+* `page[number]` (not required)
 
 
 **cURL**
@@ -43,9 +42,9 @@ curl --request GET \
 require 'URI'
 require 'net/http'
 
-url = URI("http://localhost:3000/api/team_edition/organizations/1/colleges")
+url = URI("http://qa.ncsasports.org/api/team_edition/organizations/1/colleges?filter%5Bquery%5D=portland")
 # Uncomment the below line if you want a search url instead
-# url = URI("http://qa.ncsasports.org/api/team_edition/organizations/1/colleges?filter%5Bquery%5D=portland")
+# url = URI("http://localhost:3000/api/team_edition/organizations/1/colleges")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -317,8 +316,6 @@ url: `http://qa.ncsasports.org/api/team_edition/organizations/1/colleges?filter[
   }
 }
 ```
-
-
 
 
 

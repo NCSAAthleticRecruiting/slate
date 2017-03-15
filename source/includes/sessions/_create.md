@@ -45,7 +45,7 @@ _cURL_
 curl --request POST \
   --url http://qa.ncsasports.org/api/team_edition/sign_in \
   --header 'Content-Type: application/vnd.api+json' \
-  --data '{"data":{"type":"sessions","attributes":{"email":"mia@example.com","password":"password"}}}'
+  --data '{"data":{"type":"sessions","attributes":{"email":"sniper@ncsasports.org","password":"password"}}}' \
 ```
 
 <br>
