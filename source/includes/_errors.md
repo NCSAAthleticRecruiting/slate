@@ -18,3 +18,13 @@ Error Code | Meaning
 429 | Too Many Requests -- You're requesting too many resources! Slow down!
 500 | Internal Server Error -- We had a problem with our server. Try again later.
 503 | Service Unavailable -- We're temporarially offline for maintanance. Please try again later.
+
+---
+### Miscellaneous
+
+**Help with JSON API Requests**
+
+* <a href="http://jsonapi.org/format/#crud-creating">Creating a Resource</a>
+* <a href="http://jsonapi.org/format/#crud-updating">Updating a Resource</a>
+* <a href="http://jsonapi.org/format/#crud-updating-relationships">Updating Resource Relationships</a>
+* <a href="http://jsonapi.org/format/#crud-deleting">Deleting a Resource</a>
