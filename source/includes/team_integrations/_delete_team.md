@@ -1,8 +1,10 @@
 # SOFT-DELETE A TEAM
 
-**PATCH `/api/team_edition/teams/:team_id/toggle_deleted`**
+**DELETE `/api/team_edition/teams/:team_id/delete_team`**
 
 This endpoint soft-deletes a team (sets the `deleted` field value to `true` on the team record). At present this endpoint cannot undo a soft-delete.
+
+Important: Partners should use their own `team_id` in the URL.
 
 ## Requests
 
@@ -19,8 +21,8 @@ This endpoint soft-deletes a team (sets the `deleted` field value to `true` on t
 _cURL_
 
 ```shell
-curl --request PATCH \
-  --url http://qa.ncsasports.org/api/team_edition/teams/9/toggle_deleted \
+curl --request DELETE \
+  --url http://qa.ncsasports.org/api/team_edition/teams/9/delete_team \
   --header 'content-type: application/vnd.api+json' \
   --header 'session-token: eyJ0eXAiOiJKV1QiLCiJ9...' \
 ```
@@ -32,11 +34,11 @@ _Ruby Net::Http_
 require 'URI'
 require 'net/http'
 
-url = URI("http://qa.ncsasports.org/api/team_edition/teams/9/toggle_deleted")
+url = URI("http://qa.ncsasports.org/api/team_edition/teams/9/delete_team")
 
 http = Net::HTTP.new(url.host, url.port)
 
-request = Net::HTTP::Patch.new(url)
+request = Net::HTTP::Delete.new(url)
 request['session-token'] = 'eyJ0eXAiOiJKV1QiLCiJ9...'
 request['content-type'] = 'application/vnd.api+json'
 
@@ -83,4 +85,4 @@ puts response.read_body
 
 ## Errors & Statuses
 
-* For errors, see relevant spec files to flesh out this section.
+404: Team Not Found
